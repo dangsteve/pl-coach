@@ -1,0 +1,1980 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>PL Coach</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <style>
+    :root {
+      /* base defaults; can be overridden by JS themes */
+      --bg: #020617;
+      --bg-elevated: #020617;
+      --card: #020617;
+      --card-soft: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.14);
+      --accent-strong: #4ade80;
+      --danger: #f97373;
+      --muted: #94a3b8;
+      --muted-soft: rgba(148,163,184,0.12);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-subtle: rgba(148,163,184,0.25);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15,23,42,0.6);
+      --app-max-width: 480px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, var(--bg) 45%, #000 100%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: var(--app-max-width);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 12px 12px 0;
+    }
+
+    .app-header {
+      padding: 6px 4px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .app-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .app-title-main {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge-chip {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.9);
+      color: var(--accent-strong);
+      border: 1px solid rgba(74,222,128,0.3);
+    }
+
+    .app-title-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .sync-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.9));
+      border-radius: var(--radius-pill);
+      padding: 6px 10px 6px 8px;
+      border: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .sync-label {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .sync-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      border-radius: 999px;
+      padding: 5px 8px;
+      background: rgba(15,23,42,0.9);
+      color: var(--text);
+      font-size: 12px;
+      min-width: 0;
+    }
+
+    .sync-input::placeholder {
+      color: rgba(148,163,184,0.6);
+    }
+
+    .btn-pill {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 6px 11px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent), #16a34a);
+      color: #0b1120;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 8px 30px rgba(34,197,94,0.38);
+    }
+
+    .btn-pill:disabled {
+      opacity: 0.55;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    .avatar-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: radial-gradient(circle at top, rgba(56,189,248,0.4), rgba(15,23,42,0.98));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-strong);
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 4px 0 70px;
+    }
+
+    .top-summary {
+      display: grid;
+      grid-template-columns: 1.6fr 1.2fr;
+      gap: 10px;
+    }
+
+    .summary-card {
+      background: radial-gradient(circle at top left, rgba(45,212,191,0.13), rgba(15,23,42,0.96));
+      border-radius: var(--radius-lg);
+      padding: 12px 13px;
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .summary-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .summary-value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .summary-subline {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .summary-chip-row {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-size: 10px;
+      border-radius: 999px;
+      padding: 3px 7px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.3);
+      color: var(--muted);
+    }
+
+    .summary-small {
+      background: radial-gradient(circle at top right, rgba(56,189,248,0.16), rgba(15,23,42,0.97));
+      border-radius: var(--radius-lg);
+      padding: 11px 11px 10px;
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+
+    .summary-small-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .summary-small-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .summary-small-sub {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    .card {
+      background: radial-gradient(circle at top, rgba(30,64,175,0.25), rgba(15,23,42,0.96));
+      border-radius: var(--radius-lg);
+      padding: 12px 13px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .card-caption {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .pill-tabs {
+      display: inline-flex;
+      padding: 2px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.35);
+      gap: 2px;
+    }
+
+    .pill-tab {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .pill-tab.active {
+      background: linear-gradient(135deg, var(--accent-soft), rgba(34,197,94,0.06));
+      color: var(--accent-strong);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 11px;
+    }
+
+    .field label {
+      color: var(--muted);
+    }
+
+    .field input,
+    .field select {
+      border-radius: 10px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.96);
+      color: var(--text);
+      padding: 6px 7px;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .field input::placeholder {
+      color: rgba(148,163,184,0.6);
+    }
+
+    .field select {
+      padding-right: 20px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      margin-top: 8px;
+      border-radius: 12px;
+      border: none;
+      padding: 9px 10px;
+      background: linear-gradient(135deg, var(--accent), #16a34a);
+      color: #020617;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.45);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    .btn-ghost {
+      width: 100%;
+      margin-top: 6px;
+      border-radius: 12px;
+      border: 1px dashed rgba(148,163,184,0.5);
+      padding: 8px 10px;
+      background: rgba(15,23,42,0.7);
+      color: var(--text-soft);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.45);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .today-body {
+      margin-top: 2px;
+    }
+
+    .today-main-line {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .today-sub-line {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .today-ex-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .meta-pill {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(51,65,85,0.85);
+    }
+
+    .difficulty-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .difficulty-btn {
+      flex: 1;
+      border-radius: 11px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.96);
+      color: var(--text-soft);
+      padding: 8px 4px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .difficulty-btn span.value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .difficulty-btn[data-level="3"] {
+      border-color: rgba(34,197,94,0.65);
+    }
+
+    .difficulty-btn:hover {
+      border-color: rgba(148,163,184,0.85);
+    }
+
+    .difficulty-help {
+      margin-top: 6px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .empty-state {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .section-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 11px;
+    }
+
+    .table th,
+    .table td {
+      padding: 5px 3px;
+      border-bottom: 1px solid rgba(30,41,59,0.95);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .table th {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .table td {
+      color: var(--text);
+    }
+
+    .table tbody tr:nth-child(even) {
+      background: rgba(15,23,42,0.7);
+    }
+
+    .small-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(51,65,85,0.95), transparent);
+      margin: 6px 0 8px;
+    }
+
+    .avatar-upload-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .avatar-upload-row .field {
+      min-width: 0;
+    }
+
+    .select-pill {
+      border-radius: 999px;
+      border: 1px solid rgba(51,65,85,0.9);
+      background: rgba(15,23,42,0.96);
+      color: var(--text);
+      padding: 5px 10px;
+      font-size: 11px;
+      outline: none;
+    }
+
+    .footer-nav {
+      position: fixed;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .footer-nav-inner {
+      pointer-events: auto;
+      width: 100%;
+      max-width: var(--app-max-width);
+      padding: 4px 12px;
+    }
+
+    .nav-bar {
+      display: flex;
+      background: rgba(15,23,42,0.96);
+      border-radius: 999px;
+      padding: 4px;
+      border: 1px solid rgba(30,64,175,0.75);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.9);
+      gap: 2px;
+    }
+
+    .nav-item {
+      flex: 1;
+      text-align: center;
+      border-radius: 999px;
+      padding: 6px 4px 5px;
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-item-label {
+      margin-top: 1px;
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, rgba(59,130,246,0.25), rgba(59,130,246,0.05));
+      color: var(--accent-strong);
+    }
+
+    .nav-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(148,163,184,0.6);
+    }
+
+    .nav-item.active .nav-dot {
+      background: var(--accent);
+    }
+
+    .view {
+      display: none;
+      margin-top: 4px;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* Dashboard */
+
+    .dashboard-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1.2fr;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .dash-stat-card {
+      background: rgba(15,23,42,0.94);
+      border-radius: 14px;
+      padding: 7px 9px;
+      border: 1px solid rgba(30,64,175,0.9);
+    }
+
+    .dash-stat-label {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dash-stat-value {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+
+    .dash-stat-sub {
+      font-size: 10px;
+      color: var(--text-soft);
+    }
+
+    .dash-filter-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .mini-pill {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.45);
+      color: var(--muted);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .chart-wrapper {
+      margin-top: 8px;
+      border-radius: 14px;
+      padding: 8px 10px 10px;
+      background: radial-gradient(circle at top, rgba(37,99,235,0.3), rgba(15,23,42,0.96));
+      border: 1px solid rgba(30,64,175,0.9);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .chart-title {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .chart-sub {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 130px;
+      margin-top: 6px;
+    }
+
+    .bar {
+      flex: 1;
+      border-radius: 8px 8px 3px 3px;
+      background: linear-gradient(180deg, rgba(74,222,128,0.9), rgba(34,197,94,0.2));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-inner {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(56,189,248,0.95), rgba(37,99,235,0.35));
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
+    }
+
+    .bar:hover .bar-inner {
+      opacity: 0.5;
+    }
+
+    .bar-label {
+      text-align: center;
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .bar-meta-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .pr-table {
+      margin-top: 6px;
+      border-radius: 14px;
+      padding: 7px 9px;
+      background: rgba(15,23,42,0.94);
+      border: 1px solid rgba(30,64,175,0.9);
+      font-size: 11px;
+    }
+
+    .pr-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(30,41,59,0.9);
+    }
+
+    .pr-row:last-child {
+      border-bottom: none;
+    }
+
+    .pr-label {
+      color: var(--muted);
+    }
+
+    .pr-value {
+      font-weight: 500;
+    }
+
+    .tag-green {
+      color: var(--accent-strong);
+    }
+
+    .tag-red {
+      color: #fb7185;
+    }
+
+    @media (max-width: 380px) {
+      .top-summary {
+        grid-template-columns: 1.4fr 1.3fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="app-title">
+        <div class="app-title-main">
+          PL Coach
+          <span class="badge-chip">Adaptive SBD</span>
+        </div>
+        <div class="app-title-sub">
+          Auto-adjusting powerlifting block based on how each set feels.
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="sync-card">
+          <span class="sync-label">Sync ID</span>
+          <input id="syncIdInput" class="sync-input" placeholder="e.g. name-sbd" />
+          <button id="syncBtn" class="btn-pill">Connect</button>
+        </div>
+        <div id="avatarCircle" class="avatar-circle">U</div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="top-summary">
+        <div class="summary-card" id="summaryLiftCard">
+          <div class="summary-label">Active Focus</div>
+          <div class="summary-value" id="summaryMainLift">—</div>
+          <div class="summary-subline" id="summaryMainSub">Set up your profile to generate a block.</div>
+          <div class="summary-chip-row">
+            <div class="chip" id="summaryWeeksChip">Block: — weeks</div>
+            <div class="chip" id="summaryFreqChip">Freq: — days / wk</div>
+          </div>
+        </div>
+        <div class="summary-small">
+          <div class="summary-small-label">Readiness</div>
+          <div class="summary-small-value" id="summaryReadinessScore">—</div>
+          <div class="summary-small-sub" id="summaryReadinessSub">
+            Avg difficulty last 3 sessions.
+          </div>
+        </div>
+      </section>
+
+      <!-- SETUP VIEW -->
+      <section id="view-setup" class="view active">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Profile</div>
+              <div class="card-caption">We use this to build your starting block.</div>
+            </div>
+            <div class="pill-tabs">
+              <button class="pill-tab active" data-units="lb">lb</button>
+              <button class="pill-tab" data-units="kg">kg</button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Squat max</label>
+              <input id="sqMax" type="number" min="0" step="1" placeholder="e.g. 275" />
+            </div>
+            <div class="field">
+              <label>Bench max</label>
+              <input id="bpMax" type="number" min="0" step="1" placeholder="e.g. 155" />
+            </div>
+            <div class="field">
+              <label>Deadlift max</label>
+              <input id="dlMax" type="number" min="0" step="1" placeholder="e.g. 315" />
+            </div>
+            <div class="field">
+              <label>Rounding step</label>
+              <input id="roundStep" type="number" min="0.5" step="0.5" placeholder="e.g. 2.5" />
+            </div>
+          </div>
+          <div class="small-divider"></div>
+          <div class="form-grid">
+            <div class="field">
+              <label>Days / week</label>
+              <input id="daysPerWeek" type="number" min="2" max="6" step="1" />
+            </div>
+            <div class="field">
+              <label>Block length (weeks)</label>
+              <input id="blockWeeks" type="number" min="4" max="16" step="1" />
+            </div>
+            <div class="field">
+              <label>Periodization</label>
+              <select id="periodizationType">
+                <option value="linear">Linear strength</option>
+                <option value="undulating">Undulating</option>
+                <option value="block">Block (vol→intensity)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Program goal</label>
+              <select id="goalType">
+                <option value="balanced">Balanced SBD</option>
+                <option value="squatBias">Squat bias</option>
+                <option value="benchBias">Bench bias</option>
+                <option value="deadliftBias">Deadlift bias</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="small-divider"></div>
+          <div class="avatar-upload-row">
+            <div class="field" style="flex: 1 1 140px;">
+              <label>Profile photo</label>
+              <input id="avatarInput" type="file" accept="image/*" />
+            </div>
+            <div class="field" style="flex: 0 1 150px;">
+              <label>Theme</label>
+              <select id="themeSelect" class="select-pill">
+                <option value="emerald">Emerald / Slate</option>
+                <option value="lavender">Lavender / Indigo</option>
+                <option value="sunset">Sunset / Coral</option>
+                <option value="ocean">Ocean / Teal</option>
+              </select>
+            </div>
+            <div class="field" style="flex: 0 1 130px;">
+              <label>Layout</label>
+              <select id="layoutMode" class="select-pill">
+                <option value="mobile">Mobile</option>
+                <option value="desktop">Desktop</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="saveProfileBtn" class="btn-primary">Save profile</button>
+          <button id="generateProgramBtn" class="btn-ghost">Generate / refresh block</button>
+        </div>
+      </section>
+
+      <!-- TODAY VIEW -->
+      <section id="view-today" class="view">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title" id="todayTitle">Today</div>
+              <div class="card-caption" id="todayCaption">
+                We’ll show one set at a time and adjust weights based on how it feels.
+              </div>
+            </div>
+            <div class="badge" id="todayBadge">
+              <span class="badge-dot"></span>
+              <span id="todayBadgeText">Idle</span>
+            </div>
+          </div>
+          <div id="todayContent" class="today-body"></div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD VIEW -->
+      <section id="view-dashboard" class="view">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Dashboard</div>
+              <div class="card-caption">Zoom in on a lift to see trends.</div>
+            </div>
+          </div>
+          <div class="dashboard-layout">
+            <div class="dash-filter-row">
+              <select id="dashLiftFilter" class="select-pill">
+                <option value="all">All lifts</option>
+                <option value="squat">Squat</option>
+                <option value="bench">Bench</option>
+                <option value="deadlift">Deadlift</option>
+              </select>
+              <div class="mini-pill" id="dashSummaryTag">No data yet</div>
+            </div>
+
+            <div class="dash-grid">
+              <div class="dash-stat-card">
+                <div class="dash-stat-label">Best e1RM</div>
+                <div class="dash-stat-value" id="dashBestE1RM">—</div>
+                <div class="dash-stat-sub" id="dashBestE1RMSub">Log some sets to unlock.</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-label">Last session</div>
+                <div class="dash-stat-value" id="dashLastTonnage">—</div>
+                <div class="dash-stat-sub" id="dashLastTonnageSub">Tonnage & avg difficulty.</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-label">Trend vs prior</div>
+                <div class="dash-stat-value" id="dashTrendValue">—</div>
+                <div class="dash-stat-sub" id="dashTrendSub">Change in best e1RM.</div>
+              </div>
+              <div class="dash-stat-card">
+                <div class="dash-stat-label">Set count</div>
+                <div class="dash-stat-value" id="dashSetCount">—</div>
+                <div class="dash-stat-sub" id="dashSetSub">Working sets logged.</div>
+              </div>
+            </div>
+
+            <div class="chart-wrapper">
+              <div class="chart-header">
+                <div>
+                  <div class="chart-title">Session tonnage</div>
+                  <div class="chart-sub">Total load per session (weight × reps).</div>
+                </div>
+                <div class="mini-pill" id="dashChartRange">Last sessions</div>
+              </div>
+              <div id="dashBarChart" class="bar-chart"></div>
+              <div class="bar-meta-row">
+                <span>Higher bars = more work done.</span>
+                <span id="dashBarMetaRight"></span>
+              </div>
+            </div>
+
+            <div class="pr-table">
+              <div class="section-title-row">
+                <div class="section-title">PR table</div>
+                <div class="section-subtitle">Top sets by rep range.</div>
+              </div>
+              <div id="dashPRRows">
+                <div class="empty-state">Once you log sets, we’ll surface your best sets at 1 / 3 / 5 reps.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HISTORY VIEW -->
+      <section id="view-history" class="view">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">History</div>
+              <div class="card-caption">Every logged set across the block.</div>
+            </div>
+          </div>
+          <div id="historyContent"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom nav -->
+    <footer class="footer-nav">
+      <div class="footer-nav-inner">
+        <div class="nav-bar">
+          <div class="nav-item active" data-view="setup">
+            <div class="nav-dot"></div>
+            <div class="nav-item-label">Setup</div>
+          </div>
+          <div class="nav-item" data-view="today">
+            <div class="nav-dot"></div>
+            <div class="nav-item-label">Today</div>
+          </div>
+          <div class="nav-item" data-view="dashboard">
+            <div class="nav-dot"></div>
+            <div class="nav-item-label">Dashboard</div>
+          </div>
+          <div class="nav-item" data-view="history">
+            <div class="nav-dot"></div>
+            <div class="nav-item-label">History</div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ---- Themes: trendy, high-contrast palettes ----
+    const THEMES = {
+      emerald: {
+        bg: "#020617",
+        "bg-elevated": "#020617",
+        card: "#020617",
+        "card-soft": "#020617",
+        accent: "#22c55e",
+        "accent-soft": "rgba(34,197,94,0.14)",
+        "accent-strong": "#4ade80",
+        muted: "#94a3b8",
+        "muted-soft": "rgba(148,163,184,0.12)",
+        text: "#e5e7eb",
+        "text-soft": "#9ca3af",
+        "border-subtle": "rgba(148,163,184,0.25)"
+      },
+      lavender: {
+        bg: "#050316",
+        "bg-elevated": "#050316",
+        card: "#050316",
+        "card-soft": "#0b0320",
+        accent: "#a855f7",
+        "accent-soft": "rgba(168,85,247,0.18)",
+        "accent-strong": "#e9d5ff",
+        muted: "#a5b4fc",
+        "muted-soft": "rgba(129,140,248,0.18)",
+        text: "#e5e7eb",
+        "text-soft": "#9ca3af",
+        "border-subtle": "rgba(129,140,248,0.5)"
+      },
+      sunset: {
+        bg: "#0b1120",
+        "bg-elevated": "#020617",
+        card: "#020617",
+        "card-soft": "#111827",
+        accent: "#f97316",
+        "accent-soft": "rgba(249,115,22,0.18)",
+        "accent-strong": "#fed7aa",
+        muted: "#fca5a5",
+        "muted-soft": "rgba(248,113,113,0.18)",
+        text: "#e5e7eb",
+        "text-soft": "#fecaca",
+        "border-subtle": "rgba(248,113,113,0.45)"
+      },
+      ocean: {
+        bg: "#020617",
+        "bg-elevated": "#020617",
+        card: "#020617",
+        "card-soft": "#020617",
+        accent: "#0ea5e9",
+        "accent-soft": "rgba(14,165,233,0.18)",
+        "accent-strong": "#7dd3fc",
+        muted: "#bae6fd",
+        "muted-soft": "rgba(56,189,248,0.18)",
+        text: "#e5e7eb",
+        "text-soft": "#93c5fd",
+        "border-subtle": "rgba(56,189,248,0.45)"
+      }
+    };
+
+    function applyTheme(name) {
+      const t = THEMES[name] || THEMES.emerald;
+      const root = document.documentElement;
+      Object.entries(t).forEach(([key, val]) => {
+        root.style.setProperty(`--${key}`, val);
+      });
+    }
+
+    function applyLayout(mode) {
+      const root = document.documentElement;
+      if (mode === "desktop") {
+        root.style.setProperty("--app-max-width", "1024px");
+      } else {
+        root.style.setProperty("--app-max-width", "480px");
+      }
+    }
+
+    const appState = {
+      userId: "",
+      rawState: null,
+      loading: false
+    };
+
+    function defaultState() {
+      return {
+        profile: {
+          units: "lb",
+          rounding: 2.5,
+          squatMax: null,
+          benchMax: null,
+          deadliftMax: null,
+          daysPerWeek: 4,
+          blockWeeks: 8,
+          goalType: "balanced",
+          theme: "emerald",
+          layoutMode: "mobile",
+          avatarDataUrl: null
+        },
+        program: {
+          periodization: "linear",
+          createdAt: new Date().toISOString()
+        },
+        nextSession: {
+          week: 1,
+          day: 1
+        },
+        currentSession: null,
+        history: []
+      };
+    }
+
+    function ensureState() {
+      if (!appState.rawState) {
+        appState.rawState = defaultState();
+      } else {
+        // Backwards compatibility defaults
+        const p = appState.rawState.profile || (appState.rawState.profile = {});
+        if (!p.theme) p.theme = "emerald";
+        if (!p.layoutMode) p.layoutMode = "mobile";
+      }
+      return appState.rawState;
+    }
+
+    async function loadStateFromServer() {
+      if (!appState.userId) return;
+      appState.loading = true;
+      updateSyncButton();
+      try {
+        const res = await fetch(`/api/state/${encodeURIComponent(appState.userId)}`);
+        const data = await res.json();
+        if (data && data.state) {
+          appState.rawState = data.state;
+          ensureState();
+        } else {
+          appState.rawState = defaultState();
+        }
+      } catch (e) {
+        console.error("load state error", e);
+      } finally {
+        appState.loading = false;
+        updateSyncButton();
+        renderAll();
+      }
+    }
+
+    async function saveStateToServer() {
+      if (!appState.userId || !appState.rawState) return;
+      try {
+        await fetch(`/api/state/${encodeURIComponent(appState.userId)}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ state: appState.rawState })
+        });
+      } catch (e) {
+        console.error("save error", e);
+      }
+    }
+
+    function roundToStep(value, step) {
+      if (!step || step <= 0) return value;
+      return Math.round(value / step) * step;
+    }
+
+    function estimateE1RM(weight, reps) {
+      if (!weight || !reps) return null;
+      return weight * (1 + reps / 30);
+    }
+
+    function adjustWeight(prevWeight, difficulty) {
+      if (!prevWeight) return prevWeight;
+      if (difficulty >= 4) {
+        return prevWeight * 0.97;
+      } else if (difficulty <= 2) {
+        return prevWeight * 1.02;
+      }
+      return prevWeight;
+    }
+
+    function mainLiftName(key) {
+      if (key === "squat") return "Squat";
+      if (key === "bench") return "Bench";
+      if (key === "deadlift") return "Deadlift";
+      return "Accessory";
+    }
+
+    function getMainLiftForDay(state, dayIndex) {
+      const mapping = ["squat", "bench", "deadlift", "squat", "bench", "deadlift"];
+      return mapping[(dayIndex - 1) % mapping.length];
+    }
+
+    function buildSessionPlan(state, week, day) {
+      const profile = state.profile;
+      const pType = state.program?.periodization || "linear";
+      const mainKey = getMainLiftForDay(state, day);
+      const rounding = profile.rounding || 2.5;
+
+      const maxes = {
+        squat: profile.squatMax || 0,
+        bench: profile.benchMax || 0,
+        deadlift: profile.deadliftMax || 0
+      };
+
+      const weekFactorBase = { linear: 0.68, undulating: 0.64, block: 0.62 }[pType] || 0.68;
+      let weekBump = 0.0;
+      if (pType === "linear") weekBump = (week - 1) * 0.02;
+      if (pType === "block") weekBump = (week - 1) * 0.025;
+      if (pType === "undulating") weekBump = (Math.sin((week - 1) * Math.PI / 4) * 0.02);
+
+      const mainPercent = Math.min(0.88, weekFactorBase + weekBump);
+      const mainMax = maxes[mainKey] || 0;
+
+      const mainWorkWeight = rounding ? roundToStep(mainMax * mainPercent, rounding) : mainMax * mainPercent;
+      const topSetPercent = mainPercent + 0.02;
+
+      const mainSets = [
+        { type: "ramp", reps: 5, weight: rounding ? roundToStep(mainMax * (mainPercent - 0.08), rounding) : mainMax * (mainPercent - 0.08) },
+        { type: "ramp", reps: 5, weight: rounding ? roundToStep(mainMax * (mainPercent - 0.04), rounding) : mainMax * (mainPercent - 0.04) },
+        { type: "top", reps: 3, weight: rounding ? roundToStep(mainMax * topSetPercent, rounding) : mainMax * topSetPercent },
+        { type: "backoff", reps: 5, weight: mainWorkWeight },
+        { type: "backoff", reps: 5, weight: mainWorkWeight }
+      ];
+
+      const accessories = [];
+
+      if (mainKey === "squat") {
+        accessories.push(
+          { liftKey: "accessory", exerciseName: "Barbell RDL", sets: 3, reps: 8, weight: 0.55 * (maxes.deadlift || mainMax || 135) },
+          { liftKey: "accessory", exerciseName: "Pull-ups", sets: 3, reps: 6, weight: 0 }
+        );
+      } else if (mainKey === "bench") {
+        accessories.push(
+          { liftKey: "accessory", exerciseName: "Barbell Row", sets: 3, reps: 8, weight: 0.6 * (maxes.deadlift || maxes.squat || 185) },
+          { liftKey: "accessory", exerciseName: "DB Press (light)", sets: 3, reps: 12, weight: 0 }
+        );
+      } else if (mainKey === "deadlift") {
+        accessories.push(
+          { liftKey: "accessory", exerciseName: "Front Squat (light)", sets: 3, reps: 6, weight: 0.5 * (maxes.squat || mainMax || 185) },
+          { liftKey: "accessory", exerciseName: "Pull-ups", sets: 3, reps: 6, weight: 0 }
+        );
+      }
+
+      accessories.forEach(acc => {
+        if (acc.weight) {
+          acc.weight = rounding ? roundToStep(acc.weight, rounding) : acc.weight;
+        }
+      });
+
+      const sessionPlan = [
+        {
+          liftKey: mainKey,
+          exerciseName: mainLiftName(mainKey) + " (comp)",
+          type: "main",
+          sets: mainSets
+        },
+        ...accessories.map(acc => ({
+          liftKey: acc.liftKey,
+          exerciseName: acc.exerciseName,
+          type: "accessory",
+          sets: Array.from({ length: acc.sets }, () => ({
+            type: "straight",
+            reps: acc.reps,
+            weight: acc.weight || 0
+          }))
+        }))
+      ];
+
+      return sessionPlan;
+    }
+
+    function startNewSession(state) {
+      const pointer = state.nextSession || { week: 1, day: 1 };
+      const week = pointer.week;
+      const day = pointer.day;
+      const sessionPlan = buildSessionPlan(state, week, day);
+      const sessionId = new Date().toISOString();
+      state.currentSession = {
+        sessionId,
+        week,
+        day,
+        startedAt: sessionId,
+        exerciseIndex: 0,
+        setIndex: 0,
+        plan: sessionPlan,
+        done: false
+      };
+    }
+
+    function advanceSessionCursor(state) {
+      const s = state.currentSession;
+      if (!s) return;
+      const ex = s.plan[s.exerciseIndex];
+      const sets = ex.sets;
+
+      if (s.setIndex < sets.length - 1) {
+        s.setIndex += 1;
+        return;
+      }
+
+      if (s.exerciseIndex < s.plan.length - 1) {
+        s.exerciseIndex += 1;
+        s.setIndex = 0;
+        return;
+      }
+
+      s.done = true;
+      if (!state.nextSession) state.nextSession = { week: 1, day: 1 };
+      state.nextSession.day += 1;
+      if (state.nextSession.day > (state.profile.daysPerWeek || 4)) {
+        state.nextSession.day = 1;
+        state.nextSession.week += 1;
+      }
+    }
+
+    function recordSet(state, payload) {
+      if (!state.history) state.history = [];
+      state.history.push(payload);
+    }
+
+    // ---- Rendering ----
+
+    function renderAvatar() {
+      const state = ensureState();
+      const p = state.profile || {};
+      const el = document.getElementById("avatarCircle");
+      if (!el) return;
+
+      if (p.avatarDataUrl) {
+        el.style.backgroundImage = `url('${p.avatarDataUrl}')`;
+        el.textContent = "";
+      } else {
+        el.style.backgroundImage = "";
+        const id = appState.userId || "U";
+        el.textContent = id.trim().charAt(0).toUpperCase() || "U";
+      }
+    }
+
+    function renderSummary() {
+      const state = ensureState();
+      const summaryMainLiftEl = document.getElementById("summaryMainLift");
+      const summaryMainSubEl = document.getElementById("summaryMainSub");
+      const weeksChip = document.getElementById("summaryWeeksChip");
+      const freqChip = document.getElementById("summaryFreqChip");
+      const readinessScoreEl = document.getElementById("summaryReadinessScore");
+      const readinessSubEl = document.getElementById("summaryReadinessSub");
+
+      const next = state.nextSession || { week: 1, day: 1 };
+      const mainKey = getMainLiftForDay(state, next.day);
+      summaryMainLiftEl.textContent = mainLiftName(mainKey);
+      summaryMainSubEl.textContent = `Next up: Week ${next.week}, Day ${next.day} · ${mainLiftName(mainKey)} focus`;
+
+      weeksChip.textContent = `Block: ${state.profile.blockWeeks || "—"} weeks`;
+      freqChip.textContent = `Freq: ${state.profile.daysPerWeek || "—"} days / wk`;
+
+      const last3 = state.history.slice(-20)
+        .filter(h => h.liftKey === mainKey)
+        .slice(-15);
+      if (!last3.length) {
+        readinessScoreEl.textContent = "—";
+        readinessSubEl.textContent = "We’ll score readiness once you log a few sessions.";
+        return;
+      }
+      const bySession = {};
+      last3.forEach(h => {
+        bySession[h.sessionId] = bySession[h.sessionId] || [];
+        bySession[h.sessionId].push(h);
+      });
+      const sessions = Object.values(bySession).slice(-3);
+      let avg = 0, count = 0;
+      sessions.forEach(arr => {
+        arr.forEach(h => {
+          avg += h.difficulty;
+          count += 1;
+        });
+      });
+      if (!count) {
+        readinessScoreEl.textContent = "—";
+        return;
+      }
+      avg = avg / count;
+      const score = (6 - avg).toFixed(1);
+      readinessScoreEl.textContent = score;
+      readinessSubEl.textContent = `Higher = sets felt easier · avg difficulty ${avg.toFixed(1)}/5`;
+    }
+
+    function renderSetupView() {
+      const state = ensureState();
+      const profile = state.profile || {};
+
+      document.querySelectorAll(".pill-tab").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.units === (profile.units || "lb"));
+      });
+
+      document.getElementById("sqMax").value = profile.squatMax || "";
+      document.getElementById("bpMax").value = profile.benchMax || "";
+      document.getElementById("dlMax").value = profile.deadliftMax || "";
+      document.getElementById("roundStep").value = profile.rounding || 2.5;
+      document.getElementById("daysPerWeek").value = profile.daysPerWeek || 4;
+      document.getElementById("blockWeeks").value = profile.blockWeeks || 8;
+      document.getElementById("periodizationType").value = state.program?.periodization || "linear";
+      document.getElementById("goalType").value = profile.goalType || "balanced";
+
+      document.getElementById("themeSelect").value = profile.theme || "emerald";
+      document.getElementById("layoutMode").value = profile.layoutMode || "mobile";
+
+      applyTheme(profile.theme || "emerald");
+      applyLayout(profile.layoutMode || "mobile");
+    }
+
+    function renderTodayView() {
+      const state = ensureState();
+      const titleEl = document.getElementById("todayTitle");
+      const captionEl = document.getElementById("todayCaption");
+      const badgeTextEl = document.getElementById("todayBadgeText");
+      const contentEl = document.getElementById("todayContent");
+
+      const current = state.currentSession;
+
+      if (!current || current.done) {
+        const next = state.nextSession || { week: 1, day: 1 };
+        const mainKey = getMainLiftForDay(state, next.day);
+        titleEl.textContent = "Start next session";
+        captionEl.textContent = `Week ${next.week}, Day ${next.day} · ${mainLiftName(mainKey)} focus.`;
+        badgeTextEl.textContent = "Idle";
+
+        contentEl.innerHTML = `
+          <button id="startSessionBtn" class="btn-primary">
+            Start Week ${next.week} · Day ${next.day}
+          </button>
+          <div class="empty-state">
+            Once you start, we’ll show one set at a time and auto-adjust the load based on your 1–5 rating.
+          </div>
+        `;
+        const startBtn = document.getElementById("startSessionBtn");
+        startBtn.addEventListener("click", () => {
+          startNewSession(state);
+          saveStateToServer();
+          renderAll();
+        });
+        return;
+      }
+
+      titleEl.textContent = `Week ${current.week} · Day ${current.day}`;
+      badgeTextEl.textContent = current.done ? "Done" : "In progress";
+
+      const ex = current.plan[current.exerciseIndex];
+      const set = ex.sets[current.setIndex];
+      const totalSets = ex.sets.length;
+      const setNumber = current.setIndex + 1;
+
+      const labelLift = ex.type === "main"
+        ? `${mainLiftName(ex.liftKey)} (competition)`
+        : ex.exerciseName;
+
+      captionEl.textContent = labelLift;
+
+      const weightDisplay = set.weight ? `${set.weight.toFixed(0)} ${state.profile.units || "lb"}` : "bodyweight / light";
+
+      contentEl.innerHTML = `
+        <div class="today-main-line">
+          Set ${setNumber} of ${totalSets}
+        </div>
+        <div class="today-sub-line">
+          ${weightDisplay} × ${set.reps} reps
+        </div>
+        <div class="today-ex-meta">
+          <div class="meta-pill">Exercise ${current.exerciseIndex + 1} of ${current.plan.length}</div>
+          <div class="meta-pill">${ex.type === "main" ? "Main lift" : "Accessory"}</div>
+        </div>
+        <div class="section-title-row">
+          <div class="section-title">How did that set feel?</div>
+          <div class="section-subtitle">We target ~3/5 most of the time.</div>
+        </div>
+        <div class="difficulty-row">
+          <button class="difficulty-btn" data-level="1">
+            <span class="value">1</span>
+            <span>Way too easy</span>
+          </button>
+          <button class="difficulty-btn" data-level="3">
+            <span class="value">3</span>
+            <span>On target</span>
+          </button>
+          <button class="difficulty-btn" data-level="5">
+            <span class="value">5</span>
+            <span>Too hard</span>
+          </button>
+        </div>
+        <div class="difficulty-help">
+          We’ll use your rating to bump the next set’s weight up or down. Accessories can be treated more loosely than main SBD work.
+        </div>
+      `;
+
+      contentEl.querySelectorAll(".difficulty-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const level = parseInt(btn.dataset.level, 10);
+          handleSetRating(level);
+        });
+      });
+    }
+
+    function handleSetRating(level) {
+      const state = ensureState();
+      const current = state.currentSession;
+      if (!current || current.done) return;
+
+      const ex = current.plan[current.exerciseIndex];
+      const set = ex.sets[current.setIndex];
+
+      const units = state.profile.units || "lb";
+
+      recordSet(state, {
+        sessionId: current.sessionId,
+        timestamp: new Date().toISOString(),
+        week: current.week,
+        day: current.day,
+        liftKey: ex.liftKey === "accessory" ? (ex.exerciseName.toLowerCase().includes("squat") ? "squat" :
+          ex.exerciseName.toLowerCase().includes("bench") ? "bench" :
+            ex.exerciseName.toLowerCase().includes("dead") ? "deadlift" :
+              "accessory") : ex.liftKey,
+        exerciseName: ex.exerciseName,
+        setIndex: current.setIndex + 1,
+        reps: set.reps,
+        weight: set.weight || 0,
+        difficulty: level,
+        units: units
+      });
+
+      if (current.setIndex < ex.sets.length - 1) {
+        const nextSet = ex.sets[current.setIndex + 1];
+        if (set.weight) {
+          let newW = adjustWeight(set.weight, level);
+          newW = roundToStep(newW, state.profile.rounding || 2.5);
+          nextSet.weight = newW;
+        }
+      } else if (current.exerciseIndex < current.plan.length - 1) {
+        const nextEx = current.plan[current.exerciseIndex + 1];
+        if (nextEx.type === "main") {
+          const anySets = state.history.filter(h =>
+            h.liftKey === ex.liftKey &&
+            h.sessionId === current.sessionId &&
+            h.weight > 0
+          );
+          if (anySets.length) {
+            const last = anySets[anySets.length - 1];
+            const adjust = adjustWeight(last.weight, level);
+            const rounded = roundToStep(adjust, state.profile.rounding || 2.5);
+            nextEx.sets.forEach((s, idx) => {
+              if (!s.weight && idx >= 2) {
+                s.weight = rounded;
+              }
+            });
+          }
+        }
+      }
+
+      advanceSessionCursor(state);
+      saveStateToServer();
+      renderAll();
+    }
+
+    function renderHistoryView() {
+      const state = ensureState();
+      const container = document.getElementById("historyContent");
+      const history = state.history || [];
+      if (!history.length) {
+        container.innerHTML = `<div class="empty-state">No sets logged yet. Once you rate sets in the Today tab, they’ll show up here.</div>`;
+        return;
+      }
+
+      const rows = history.slice().reverse().map(h => {
+        const date = new Date(h.timestamp);
+        const dStr = date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+        const tStr = date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
+        return `
+          <tr>
+            <td>${dStr}</td>
+            <td>${mainLiftName(h.liftKey)}</td>
+            <td>${h.exerciseName}</td>
+            <td>${h.weight ? h.weight.toFixed(0) : "—"}</td>
+            <td>${h.reps}</td>
+            <td>${h.difficulty}</td>
+            <td>${tStr}</td>
+          </tr>
+        `;
+      }).join("");
+
+      container.innerHTML = `
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Lift</th>
+              <th>Exercise</th>
+              <th>Weight</th>
+              <th>Reps</th>
+              <th>Feel (1–5)</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function computeDashboardData(liftKey) {
+      const state = ensureState();
+      const all = state.history || [];
+      if (!all.length) return null;
+
+      let filtered = all;
+      if (liftKey !== "all") {
+        filtered = filtered.filter(h => h.liftKey === liftKey);
+      } else {
+        filtered = filtered.filter(h => h.liftKey === "squat" || h.liftKey === "bench" || h.liftKey === "deadlift");
+      }
+      if (!filtered.length) return null;
+
+      const bySession = {};
+      filtered.forEach(h => {
+        bySession[h.sessionId] = bySession[h.sessionId] || { sets: [], date: h.timestamp };
+        bySession[h.sessionId].sets.push(h);
+        if (h.timestamp < bySession[h.sessionId].date) bySession[h.sessionId].date = h.timestamp;
+      });
+
+      const sessions = Object.values(bySession).map(s => {
+        let tonnage = 0;
+        let diffSum = 0, diffCount = 0;
+        let bestE1 = 0;
+        s.sets.forEach(h => {
+          if (h.weight && h.reps) {
+            tonnage += h.weight * h.reps;
+            const e1 = estimateE1RM(h.weight, h.reps);
+            if (e1 && e1 > bestE1) bestE1 = e1;
+          }
+          if (h.difficulty) {
+            diffSum += h.difficulty;
+            diffCount += 1;
+          }
+        });
+        const avgDiff = diffCount ? diffSum / diffCount : null;
+        return {
+          date: s.date,
+          tonnage,
+          bestE1,
+          avgDiff
+        };
+      }).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      let globalBest = 0;
+      sessions.forEach(s => {
+        if (s.bestE1 && s.bestE1 > globalBest) globalBest = s.bestE1;
+      });
+
+      const lastSession = sessions[sessions.length - 1];
+      const prevBest = sessions.length > 1 ? Math.max(...sessions.slice(0, -1).map(s => s.bestE1 || 0)) : null;
+
+      const prByReps = {};
+      filtered.forEach(h => {
+        const r = h.reps;
+        if (r > 10) return;
+        const key = r;
+        const current = prByReps[key];
+        if (!current || h.weight > current.weight) {
+          prByReps[key] = {
+            reps: r,
+            weight: h.weight,
+            date: h.timestamp
+          };
+        }
+      });
+
+      return {
+        liftKey,
+        setCount: filtered.length,
+        sessions,
+        lastSession,
+        globalBest,
+        prevBest,
+        prByReps
+      };
+    }
+
+    function renderDashboardView() {
+      const liftKey = document.getElementById("dashLiftFilter").value;
+      const data = computeDashboardData(liftKey);
+      const tagEl = document.getElementById("dashSummaryTag");
+      const bestE1El = document.getElementById("dashBestE1RM");
+      const bestE1SubEl = document.getElementById("dashBestE1RMSub");
+      const lastTonEl = document.getElementById("dashLastTonnage");
+      const lastTonSubEl = document.getElementById("dashLastTonnageSub");
+      const trendValEl = document.getElementById("dashTrendValue");
+      const trendSubEl = document.getElementById("dashTrendSub");
+      const setCountEl = document.getElementById("dashSetCount");
+      const setSubEl = document.getElementById("dashSetSub");
+      const chartRangeEl = document.getElementById("dashChartRange");
+      const chartEl = document.getElementById("dashBarChart");
+      const chartMetaRight = document.getElementById("dashBarMetaRight");
+      const prRowsEl = document.getElementById("dashPRRows");
+
+      const label = liftKey === "all" ? "All SBD sets" : `${mainLiftName(liftKey)} only`;
+
+      if (!data) {
+        tagEl.textContent = `${label} · no data`;
+        bestE1El.textContent = "—";
+        bestE1SubEl.textContent = "Log a few sets and we’ll estimate your 1RM.";
+        lastTonEl.textContent = "—";
+        lastTonSubEl.textContent = "No sessions yet.";
+        trendValEl.textContent = "—";
+        trendSubEl.textContent = "Trend will show once we have more history.";
+        setCountEl.textContent = "0";
+        setSubEl.textContent = "Working sets logged.";
+        chartRangeEl.textContent = "No sessions";
+        chartEl.innerHTML = "";
+        chartMetaRight.textContent = "";
+        prRowsEl.innerHTML = `<div class="empty-state">No data yet. Rate sets in the Today tab.</div>`;
+        return;
+      }
+
+      tagEl.textContent = `${label} · ${(data.sessions.length)} sessions`;
+
+      if (data.globalBest) {
+        bestE1El.textContent = `${data.globalBest.toFixed(0)} ${ensureState().profile.units || "lb"}`;
+        const d = new Date(data.sessions.find(s => s.bestE1 === data.globalBest).date);
+        bestE1SubEl.textContent = `Best estimated 1RM from training · ${d.toLocaleDateString()}`;
+      } else {
+        bestE1El.textContent = "—";
+        bestE1SubEl.textContent = "Need some heavier sets to estimate 1RM.";
+      }
+
+      if (data.lastSession) {
+        lastTonEl.textContent = data.lastSession.tonnage ? `${(data.lastSession.tonnage).toFixed(0)} ${ensureState().profile.units || "lb"}` : "—";
+        lastTonSubEl.textContent =
+          `Avg difficulty ${data.lastSession.avgDiff ? data.lastSession.avgDiff.toFixed(1) : "—"}/5 · ${new Date(data.lastSession.date).toLocaleDateString()}`;
+      } else {
+        lastTonEl.textContent = "—";
+        lastTonSubEl.textContent = "No recent sessions.";
+      }
+
+      if (data.globalBest && data.prevBest != null && data.prevBest > 0) {
+        const delta = data.globalBest - data.prevBest;
+        const pct = (delta / data.prevBest) * 100;
+        const sign = delta >= 0 ? "+" : "";
+        trendValEl.textContent = `${sign}${delta.toFixed(0)} ${ensureState().profile.units || "lb"}`;
+        trendSubEl.textContent = `${sign}${pct.toFixed(1)}% vs previous best 1RM`;
+        trendValEl.classList.toggle("tag-green", delta >= 0);
+        trendValEl.classList.toggle("tag-red", delta < 0);
+      } else {
+        trendValEl.textContent = "—";
+        trendSubEl.textContent = "Need at least two strong sessions for a trend.";
+      }
+
+      setCountEl.textContent = data.setCount.toString();
+      setSubEl.textContent = "Working sets logged.";
+
+      const sessions = data.sessions.slice(-8);
+      chartRangeEl.textContent = `${sessions.length} recent sessions`;
+
+      const maxTon = Math.max(...sessions.map(s => s.tonnage || 0)) || 1;
+      chartEl.innerHTML = sessions.map(s => {
+        const hPct = Math.max(8, Math.round((s.tonnage || 0) / maxTon * 100));
+        const d = new Date(s.date);
+        const labelStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+        return `
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
+            <div class="bar" style="height:${hPct}%;">
+              <div class="bar-inner"></div>
+            </div>
+            <div class="bar-label">${labelStr}</div>
+          </div>
+        `;
+      }).join("");
+
+      chartMetaRight.textContent = `Peak tonnage ${(maxTon).toFixed(0)} ${ensureState().profile.units || "lb"}`;
+
+      const prs = data.prByReps;
+      const repTargets = [1, 3, 5];
+      const prRows = repTargets.map(r => {
+        const pr = prs[r];
+        if (!pr) {
+          return `
+            <div class="pr-row">
+              <div class="pr-label">${r} rep best</div>
+              <div class="pr-value">—</div>
+            </div>
+          `;
+        }
+        const d = new Date(pr.date);
+        return `
+          <div class="pr-row">
+            <div class="pr-label">${r} rep best</div>
+            <div class="pr-value">${pr.weight.toFixed(0)} ${ensureState().profile.units || "lb"} · ${d.toLocaleDateString()}</div>
+          </div>
+        `;
+      }).join("");
+
+      prRowsEl.innerHTML = prRows;
+    }
+
+    function renderAll() {
+      const state = ensureState();
+      applyTheme(state.profile.theme || "emerald");
+      applyLayout(state.profile.layoutMode || "mobile");
+      renderAvatar();
+      renderSummary();
+      renderSetupView();
+      renderTodayView();
+      renderHistoryView();
+      renderDashboardView();
+    }
+
+    function updateSyncButton() {
+      const btn = document.getElementById("syncBtn");
+      if (appState.loading) {
+        btn.textContent = "Loading…";
+        btn.disabled = true;
+      } else {
+        btn.textContent = "Connect";
+        btn.disabled = false;
+      }
+    }
+
+    // ---- Events ----
+
+    document.getElementById("syncBtn").addEventListener("click", () => {
+      const input = document.getElementById("syncIdInput");
+      const val = input.value.trim();
+      if (!val) {
+        alert("Enter a sync ID first (e.g. name-sbd).");
+        return;
+      }
+      appState.userId = val;
+      loadStateFromServer();
+      renderAvatar();
+    });
+
+    document.querySelectorAll(".pill-tab").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const units = btn.dataset.units;
+        const state = ensureState();
+        state.profile.units = units;
+        document.querySelectorAll(".pill-tab").forEach(b => {
+          b.classList.toggle("active", b === btn);
+        });
+        saveStateToServer();
+        renderAll();
+      });
+    });
+
+    document.getElementById("saveProfileBtn").addEventListener("click", () => {
+      const state = ensureState();
+      const p = state.profile;
+      p.squatMax = parseFloat(document.getElementById("sqMax").value) || null;
+      p.benchMax = parseFloat(document.getElementById("bpMax").value) || null;
+      p.deadliftMax = parseFloat(document.getElementById("dlMax").value) || null;
+      p.rounding = parseFloat(document.getElementById("roundStep").value) || 2.5;
+      p.daysPerWeek = parseInt(document.getElementById("daysPerWeek").value || "4", 10);
+      p.blockWeeks = parseInt(document.getElementById("blockWeeks").value || "8", 10);
+      p.goalType = document.getElementById("goalType").value;
+      state.program = state.program || {};
+      state.program.periodization = document.getElementById("periodizationType").value;
+      saveStateToServer();
+      renderAll();
+    });
+
+    document.getElementById("generateProgramBtn").addEventListener("click", () => {
+      const state = ensureState();
+      state.nextSession = { week: 1, day: 1 };
+      state.currentSession = null;
+      state.program = state.program || {};
+      state.program.periodization = document.getElementById("periodizationType").value;
+      state.program.createdAt = new Date().toISOString();
+      saveStateToServer();
+      renderAll();
+      alert("Program regenerated from your profile. You can start at the Today tab.");
+    });
+
+    document.querySelectorAll(".nav-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const view = item.dataset.view;
+        document.querySelectorAll(".nav-item").forEach(n => n.classList.toggle("active", n === item));
+        document.querySelectorAll(".view").forEach(v => {
+          v.classList.toggle("active", v.id === `view-${view}`);
+        });
+        if (view === "dashboard") renderDashboardView();
+      });
+    });
+
+    document.getElementById("dashLiftFilter").addEventListener("change", () => {
+      renderDashboardView();
+    });
+
+    document.getElementById("themeSelect").addEventListener("change", e => {
+      const state = ensureState();
+      state.profile.theme = e.target.value;
+      applyTheme(state.profile.theme);
+      saveStateToServer();
+      renderAll();
+    });
+
+    document.getElementById("layoutMode").addEventListener("change", e => {
+      const state = ensureState();
+      state.profile.layoutMode = e.target.value;
+      applyLayout(state.profile.layoutMode);
+      saveStateToServer();
+      renderAll();
+    });
+
+    document.getElementById("avatarInput").addEventListener("change", e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        alert("Please choose an image under 2MB.");
+        e.target.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const state = ensureState();
+        state.profile.avatarDataUrl = reader.result;
+        saveStateToServer();
+        renderAvatar();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
