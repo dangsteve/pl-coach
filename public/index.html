@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
   <style>
     :root {
-      /* base defaults; can be overridden by JS themes */
       --bg: #020617;
       --bg-elevated: #020617;
       --card: #020617;
@@ -34,7 +33,7 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top, #0f172a 0, var(--bg) 45%, #000 100%);
+      background: radial-gradient(circle at top, #0b1120 0, var(--bg) 40%, var(--bg-elevated) 100%);
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -183,7 +182,7 @@
     }
 
     .summary-card {
-      background: radial-gradient(circle at top left, rgba(45,212,191,0.13), rgba(15,23,42,0.96));
+      background: radial-gradient(circle at top left, rgba(45,212,191,0.13), var(--card));
       border-radius: var(--radius-lg);
       padding: 12px 13px;
       border: 1px solid rgba(148,163,184,0.3);
@@ -218,13 +217,13 @@
       font-size: 10px;
       border-radius: 999px;
       padding: 3px 7px;
-      background: rgba(15,23,42,0.9);
+      background: var(--card-soft);
       border: 1px solid rgba(148,163,184,0.3);
       color: var(--muted);
     }
 
     .summary-small {
-      background: radial-gradient(circle at top right, rgba(56,189,248,0.16), rgba(15,23,42,0.97));
+      background: radial-gradient(circle at top right, rgba(56,189,248,0.16), var(--card));
       border-radius: var(--radius-lg);
       padding: 11px 11px 10px;
       border: 1px solid rgba(148,163,184,0.3);
@@ -248,7 +247,7 @@
     }
 
     .card {
-      background: radial-gradient(circle at top, rgba(30,64,175,0.25), rgba(15,23,42,0.96));
+      background: radial-gradient(circle at top, rgba(30,64,175,0.25), var(--card-soft));
       border-radius: var(--radius-lg);
       padding: 12px 13px;
       border: 1px solid var(--border-subtle);
@@ -278,7 +277,7 @@
       display: inline-flex;
       padding: 2px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
+      background: var(--card-soft);
       border: 1px solid rgba(148,163,184,0.35);
       gap: 2px;
     }
@@ -320,7 +319,7 @@
     .field select {
       border-radius: 10px;
       border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(15,23,42,0.96);
+      background: var(--card-soft);
       color: var(--text);
       padding: 6px 7px;
       font-size: 12px;
@@ -361,7 +360,7 @@
       border-radius: 12px;
       border: 1px dashed rgba(148,163,184,0.5);
       padding: 8px 10px;
-      background: rgba(15,23,42,0.7);
+      background: var(--card-soft);
       color: var(--text-soft);
       font-size: 12px;
       cursor: pointer;
@@ -373,7 +372,7 @@
       gap: 5px;
       padding: 4px 7px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
+      background: var(--card-soft);
       border: 1px solid rgba(148,163,184,0.45);
       font-size: 11px;
       color: var(--muted);
@@ -414,7 +413,7 @@
     .meta-pill {
       padding: 4px 7px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
+      background: var(--card-soft);
       border: 1px solid rgba(51,65,85,0.85);
     }
 
@@ -428,7 +427,7 @@
       flex: 1;
       border-radius: 11px;
       border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(15,23,42,0.96);
+      background: var(--card-soft);
       color: var(--text-soft);
       padding: 8px 4px;
       font-size: 11px;
@@ -458,6 +457,54 @@
       margin-top: 6px;
       font-size: 10px;
       color: var(--muted);
+    }
+
+    .rest-timer-row {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: var(--card-soft);
+      border: 1px solid rgba(51,65,85,0.9);
+      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .rest-timer-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rest-timer-label {
+      color: var(--muted);
+    }
+
+    .rest-timer-count {
+      font-weight: 600;
+    }
+
+    .rest-timer-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .rest-btn {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: var(--card-soft);
+      color: var(--text-soft);
+      font-size: 11px;
+      padding: 6px 4px;
+      cursor: pointer;
+    }
+
+    .rest-btn.primary {
+      border-color: var(--accent-strong);
+      color: var(--accent-strong);
     }
 
     .empty-state {
@@ -512,7 +559,7 @@
     }
 
     .table tbody tr:nth-child(even) {
-      background: rgba(15,23,42,0.7);
+      background: var(--card-soft);
     }
 
     .small-divider {
@@ -535,7 +582,7 @@
     .select-pill {
       border-radius: 999px;
       border: 1px solid rgba(51,65,85,0.9);
-      background: rgba(15,23,42,0.96);
+      background: var(--card-soft);
       color: var(--text);
       padding: 5px 10px;
       font-size: 11px;
@@ -561,7 +608,7 @@
 
     .nav-bar {
       display: flex;
-      background: rgba(15,23,42,0.96);
+      background: var(--card-soft);
       border-radius: 999px;
       padding: 4px;
       border: 1px solid rgba(30,64,175,0.75);
@@ -630,7 +677,7 @@
     }
 
     .dash-stat-card {
-      background: rgba(15,23,42,0.94);
+      background: var(--card-soft);
       border-radius: 14px;
       padding: 7px 9px;
       border: 1px solid rgba(30,64,175,0.9);
@@ -670,14 +717,14 @@
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.45);
       color: var(--muted);
-      background: rgba(15,23,42,0.9);
+      background: var(--card-soft);
     }
 
     .chart-wrapper {
       margin-top: 8px;
       border-radius: 14px;
       padding: 8px 10px 10px;
-      background: radial-gradient(circle at top, rgba(37,99,235,0.3), rgba(15,23,42,0.96));
+      background: radial-gradient(circle at top, rgba(37,99,235,0.3), var(--card-soft));
       border: 1px solid rgba(30,64,175,0.9);
     }
 
@@ -700,32 +747,98 @@
       color: var(--muted);
     }
 
-    .bar-chart {
+    .chart-controls {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .chart-select {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: var(--card-soft);
+      color: var(--text);
+      font-size: 11px;
+      padding: 4px 20px 4px 10px;
+      outline: none;
+      appearance: none;
+      position: relative;
+    }
+
+    .chart-frame {
+      margin-top: 6px;
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+      height: 170px;
+      padding: 4px 6px 6px;
+      border-radius: 12px;
+      background: var(--card-soft);
+      border: 1px solid rgba(30,64,175,0.9);
+    }
+
+    .chart-y-axis {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      font-size: 9px;
+      color: var(--muted);
+      padding-right: 4px;
+      border-right: 1px solid rgba(51,65,85,0.95);
+    }
+
+    .chart-y-tick {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      min-height: 0;
+    }
+
+    .chart-inner {
+      flex: 1;
+      height: 100%;
+      position: relative;
       display: flex;
       align-items: flex-end;
       gap: 6px;
-      height: 130px;
-      margin-top: 6px;
     }
 
-    .bar {
+    .chart-bar-col {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .chart-bar {
+      width: 70%;
+      min-height: 6px;
       border-radius: 8px 8px 3px 3px;
       background: linear-gradient(180deg, rgba(74,222,128,0.9), rgba(34,197,94,0.2));
+      border: 1px solid var(--accent-strong);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(34,197,94,0.35);
+      margin: 0 auto;
     }
 
-    .bar-inner {
+    .chart-bar:hover::after {
+      opacity: 0.35;
+    }
+
+    .chart-bar::after {
+      content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(56,189,248,0.95), rgba(37,99,235,0.35));
+      background: linear-gradient(180deg, rgba(56,189,248,0.9), rgba(37,99,235,0.3));
       opacity: 0;
-      transition: opacity 0.2s ease-out;
-    }
-
-    .bar:hover .bar-inner {
-      opacity: 0.5;
+      transition: opacity 0.15s ease-out;
     }
 
     .bar-label {
@@ -736,7 +849,23 @@
       white-space: nowrap;
     }
 
-    .bar-meta-row {
+    .chart-tooltip {
+      position: absolute;
+      pointer-events: none;
+      background: rgba(15,23,42,0.98);
+      border-radius: 8px;
+      border: 1px solid rgba(148,163,184,0.7);
+      padding: 5px 7px;
+      font-size: 10px;
+      color: var(--text);
+      transform: translate(-50%, -100%);
+      white-space: nowrap;
+      z-index: 10;
+      box-shadow: 0 10px 30px rgba(15,23,42,0.9);
+      display: none;
+    }
+
+    .chart-meta-row {
       display: flex;
       justify-content: space-between;
       margin-top: 4px;
@@ -748,7 +877,7 @@
       margin-top: 6px;
       border-radius: 14px;
       padding: 7px 9px;
-      background: rgba(15,23,42,0.94);
+      background: var(--card-soft);
       border: 1px solid rgba(30,64,175,0.9);
       font-size: 11px;
     }
@@ -780,9 +909,93 @@
       color: #fb7185;
     }
 
+    /* Program view */
+
+    .program-block-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .program-table-wrapper {
+      margin-top: 6px;
+      border-radius: 14px;
+      background: var(--card-soft);
+      border: 1px solid rgba(30,64,175,0.9);
+      padding: 7px 9px;
+      font-size: 11px;
+      max-height: 220px;
+      overflow: auto;
+    }
+
+    .program-day-row {
+      cursor: pointer;
+    }
+
+    .program-day-row:hover {
+      background: rgba(30,64,175,0.5);
+    }
+
+    .program-detail-panel {
+      margin-top: 6px;
+      border-radius: 14px;
+      background: var(--card-soft);
+      border: 1px solid rgba(30,64,175,0.9);
+      padding: 7px 9px;
+      font-size: 11px;
+      max-height: 220px;
+      overflow: auto;
+    }
+
+    .program-detail-title {
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .program-detail-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .program-detail-ex {
+      margin-top: 4px;
+      padding-top: 3px;
+      border-top: 1px solid rgba(30,41,59,0.9);
+    }
+
+    .program-detail-ex:first-of-type {
+      border-top: none;
+    }
+
+    .program-detail-ex-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .program-detail-sets {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .program-detail-tag {
+      font-size: 9px;
+      border-radius: 999px;
+      padding: 2px 6px;
+      border: 1px solid rgba(148,163,184,0.45);
+    }
+
     @media (max-width: 380px) {
       .top-summary {
         grid-template-columns: 1.4fr 1.3fr;
+      }
+
+      .chart-frame {
+        height: 150px;
       }
     }
   </style>
@@ -812,7 +1025,7 @@
     <main class="app-main">
       <section class="top-summary">
         <div class="summary-card" id="summaryLiftCard">
-          <div class="summary-label">Active Focus</div>
+          <div class="summary-label">Active focus</div>
           <div class="summary-value" id="summaryMainLift">—</div>
           <div class="summary-subline" id="summaryMainSub">Set up your profile to generate a block.</div>
           <div class="summary-chip-row">
@@ -835,7 +1048,7 @@
           <div class="card-header">
             <div>
               <div class="card-title">Profile</div>
-              <div class="card-caption">We use this to build your starting block.</div>
+              <div class="card-caption">We use this to build your starting macrocycle.</div>
             </div>
             <div class="pill-tabs">
               <button class="pill-tab active" data-units="lb">lb</button>
@@ -864,18 +1077,18 @@
           <div class="form-grid">
             <div class="field">
               <label>Days / week</label>
-              <input id="daysPerWeek" type="number" min="2" max="6" step="1" />
+              <input id="daysPerWeek" type="number" min="3" max="6" step="1" />
             </div>
             <div class="field">
               <label>Block length (weeks)</label>
-              <input id="blockWeeks" type="number" min="4" max="16" step="1" />
+              <input id="blockWeeks" type="number" min="8" max="16" step="1" />
             </div>
             <div class="field">
               <label>Periodization</label>
               <select id="periodizationType">
-                <option value="linear">Linear strength</option>
-                <option value="undulating">Undulating</option>
-                <option value="block">Block (vol→intensity)</option>
+                <option value="linear">Linear · volume → intensity → peak</option>
+                <option value="undulating">Undulating · heavy / medium / light waves</option>
+                <option value="block">Block · distinct volume / strength / peak</option>
               </select>
             </div>
             <div class="field">
@@ -885,6 +1098,30 @@
                 <option value="squatBias">Squat bias</option>
                 <option value="benchBias">Bench bias</option>
                 <option value="deadliftBias">Deadlift bias</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- New anthropometrics + equipment -->
+          <div class="form-grid">
+            <div class="field">
+              <label>Age</label>
+              <input id="age" type="number" min="10" max="90" step="1" />
+            </div>
+            <div class="field">
+              <label>Bodyweight</label>
+              <input id="bodyweight" type="number" min="60" step="1" placeholder="same units as training" />
+            </div>
+            <div class="field">
+              <label>Height (in)</label>
+              <input id="heightIn" type="number" min="48" max="84" step="1" />
+            </div>
+            <div class="field">
+              <label>Training environment</label>
+              <select id="equipmentMode">
+                <option value="barbellDb">Home · barbell + dumbbells</option>
+                <option value="barbellOnly">Home · barbell only</option>
+                <option value="gymFull">Full gym · machines + cables</option>
               </select>
             </div>
           </div>
@@ -902,6 +1139,7 @@
                 <option value="lavender">Lavender / Indigo</option>
                 <option value="sunset">Sunset / Coral</option>
                 <option value="ocean">Ocean / Teal</option>
+                <option value="softlight">Soft light</option>
               </select>
             </div>
             <div class="field" style="flex: 0 1 130px;">
@@ -914,7 +1152,70 @@
           </div>
 
           <button id="saveProfileBtn" class="btn-primary">Save profile</button>
-          <button id="generateProgramBtn" class="btn-ghost">Generate / refresh block</button>
+          <button id="generateProgramBtn" class="btn-ghost">Generate / refresh macrocycle</button>
+        </div>
+
+        <!-- Program inspector + tuning -->
+        <div class="card" style="margin-top:10px;">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Program overview</div>
+              <div class="card-caption">Tap a day to see the full training plan.</div>
+            </div>
+          </div>
+          <div class="program-block-label" id="programPhaseLabel">
+            No program yet. Save profile and generate a macrocycle.
+          </div>
+          <div class="program-table-wrapper" id="programTableWrapper"></div>
+          <div id="programDetailPanel" class="program-detail-panel">
+            <div class="program-detail-title">Day details</div>
+            <div class="program-detail-sub">
+              Tap any day in the table above to see all sets, reps, and accessories.
+            </div>
+          </div>
+          <div class="small-divider"></div>
+          <div class="section-title-row">
+            <div class="section-title">Fine-tune a day</div>
+            <div class="section-subtitle">Changes propagate through remaining weeks for that lift.</div>
+          </div>
+          <div class="program-tune-grid">
+            <div class="field">
+              <label>Week</label>
+              <input id="progAdjustWeek" type="number" min="1" step="1" />
+            </div>
+            <div class="field">
+              <label>Day</label>
+              <input id="progAdjustDay" type="number" min="1" step="1" />
+            </div>
+            <div class="field">
+              <label>Set # (of primary lift)</label>
+              <input id="progAdjustSetIndex" type="number" min="1" step="1" />
+            </div>
+            <div class="field">
+              <label>Action</label>
+              <select id="progAdjustAction">
+                <option value="incWeight">Increase weight</option>
+                <option value="decWeight">Decrease weight</option>
+                <option value="incReps">Increase reps</option>
+                <option value="decReps">Decrease reps</option>
+                <option value="incSets">Increase sets</option>
+                <option value="decSets">Decrease sets</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid" style="margin-top:6px;">
+            <div class="field">
+              <label>Amount (lb/kg or reps / sets)</label>
+              <input id="progAdjustAmount" type="number" step="1" />
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <button id="applyProgramAdjustBtn" class="btn-primary">Apply to macrocycle</button>
+            </div>
+          </div>
+          <div class="program-note">
+            Example: Week 2, Day 3, Set 1, increase weight 5 → adds 5 lb/kg to that lift’s work sets across remaining weeks.
+          </div>
         </div>
       </section>
 
@@ -943,13 +1244,12 @@
           <div class="card-header">
             <div>
               <div class="card-title">Dashboard</div>
-              <div class="card-caption">Zoom in on a lift to see trends.</div>
+              <div class="card-caption">Zoom in on a lift or metric to see trends.</div>
             </div>
           </div>
           <div class="dashboard-layout">
             <div class="dash-filter-row">
               <select id="dashLiftFilter" class="select-pill">
-                <option value="all">All lifts</option>
                 <option value="squat">Squat</option>
                 <option value="bench">Bench</option>
                 <option value="deadlift">Deadlift</option>
@@ -983,15 +1283,32 @@
             <div class="chart-wrapper">
               <div class="chart-header">
                 <div>
-                  <div class="chart-title">Session tonnage</div>
-                  <div class="chart-sub">Total load per session (weight × reps).</div>
+                  <div class="chart-title">Performance graph</div>
+                  <div class="chart-sub" id="chartSubtitle">
+                    Weighted by load, reps, and how it felt, higher is better.
+                  </div>
                 </div>
-                <div class="mini-pill" id="dashChartRange">Last sessions</div>
+                <div class="chart-controls">
+                  <select id="chartMetricSelect" class="chart-select">
+                    <option value="performance">Performance score</option>
+                    <option value="calories">Calories burned</option>
+                    <option value="sessionTime">Session time (min)</option>
+                    <option value="restTime">Rest time (min)</option>
+                  </select>
+                  <select id="chartRangeSelect" class="chart-select">
+                    <option value="7">7 recent sessions</option>
+                    <option value="14">14 recent sessions</option>
+                    <option value="all">All sessions</option>
+                  </select>
+                  <button id="exportTsvBtn" class="btn-pill" style="padding:4px 10px;font-size:10px;">
+                    Export TSV
+                  </button>
+                </div>
               </div>
-              <div id="dashBarChart" class="bar-chart"></div>
-              <div class="bar-meta-row">
-                <span>Higher bars = more work done.</span>
-                <span id="dashBarMetaRight"></span>
+              <div id="dashChart" class="chart-frame"></div>
+              <div class="chart-meta-row">
+                <span id="chartMetaLeft">Each bar = one session.</span>
+                <span id="chartMetaRight"></span>
               </div>
             </div>
 
@@ -1014,7 +1331,7 @@
           <div class="card-header">
             <div>
               <div class="card-title">History</div>
-              <div class="card-caption">Every logged set across the block.</div>
+              <div class="card-caption">Every logged set across all blocks.</div>
             </div>
           </div>
           <div id="historyContent"></div>
@@ -1048,7 +1365,7 @@
   </div>
 
   <script>
-    // ---- Themes: trendy, high-contrast palettes ----
+    // ---- Themes ----
     const THEMES = {
       emerald: {
         bg: "#020617",
@@ -1105,6 +1422,20 @@
         text: "#e5e7eb",
         "text-soft": "#93c5fd",
         "border-subtle": "rgba(56,189,248,0.45)"
+      },
+      softlight: {
+        bg: "#e5e7eb",
+        "bg-elevated": "#f9fafb",
+        card: "#ffffff",
+        "card-soft": "#f3f4f6",
+        accent: "#16a34a",
+        "accent-soft": "rgba(22,163,74,0.14)",
+        "accent-strong": "#16a34a",
+        muted: "#6b7280",
+        "muted-soft": "rgba(148,163,184,0.18)",
+        text: "#111827",
+        "text-soft": "#4b5563",
+        "border-subtle": "rgba(148,163,184,0.45)"
       }
     };
 
@@ -1131,6 +1462,10 @@
       loading: false
     };
 
+    function defaultLiftTuning() {
+      return { weightDeltaAbs: 0, repDelta: 0, setDelta: 0 };
+    }
+
     function defaultState() {
       return {
         profile: {
@@ -1140,15 +1475,24 @@
           benchMax: null,
           deadliftMax: null,
           daysPerWeek: 4,
-          blockWeeks: 8,
+          blockWeeks: 12,
           goalType: "balanced",
           theme: "emerald",
           layoutMode: "mobile",
-          avatarDataUrl: null
+          avatarDataUrl: null,
+          age: null,
+          heightIn: null,
+          bodyweight: null,
+          equipmentMode: "barbellDb"
         },
         program: {
           periodization: "linear",
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
+          tuning: {
+            squat: defaultLiftTuning(),
+            bench: defaultLiftTuning(),
+            deadlift: defaultLiftTuning()
+          }
         },
         nextSession: {
           week: 1,
@@ -1163,14 +1507,48 @@
       if (!appState.rawState) {
         appState.rawState = defaultState();
       } else {
-        // Backwards compatibility defaults
-        const p = appState.rawState.profile || (appState.rawState.profile = {});
-        if (!p.theme) p.theme = "emerald";
-        if (!p.layoutMode) p.layoutMode = "mobile";
+        const s = appState.rawState;
+        s.profile = s.profile || {};
+        if (!("theme" in s.profile)) s.profile.theme = "emerald";
+        if (!("layoutMode" in s.profile)) s.profile.layoutMode = "mobile";
+        if (!("goalType" in s.profile)) s.profile.goalType = "balanced";
+        if (!("equipmentMode" in s.profile)) s.profile.equipmentMode = "barbellDb";
+        if (!("age" in s.profile)) s.profile.age = null;
+        if (!("heightIn" in s.profile)) s.profile.heightIn = null;
+        if (!("bodyweight" in s.profile)) s.profile.bodyweight = null;
+
+        if (!s.program) {
+          s.program = {
+            periodization: "linear",
+            createdAt: new Date().toISOString(),
+            tuning: {
+              squat: defaultLiftTuning(),
+              bench: defaultLiftTuning(),
+              deadlift: defaultLiftTuning()
+            }
+          };
+        }
+        if (!s.program.tuning) {
+          s.program.tuning = {
+            squat: defaultLiftTuning(),
+            bench: defaultLiftTuning(),
+            deadlift: defaultLiftTuning()
+          };
+        } else {
+          ["squat", "bench", "deadlift"].forEach(l => {
+            const t = s.program.tuning[l] || {};
+            s.program.tuning[l] = {
+              weightDeltaAbs: typeof t.weightDeltaAbs === "number" ? t.weightDeltaAbs : 0,
+              repDelta: typeof t.repDelta === "number" ? t.repDelta : 0,
+              setDelta: typeof t.setDelta === "number" ? t.setDelta : 0
+            };
+          });
+        }
       }
       return appState.rawState;
     }
 
+    // ---- Backend sync ----
     async function loadStateFromServer() {
       if (!appState.userId) return;
       appState.loading = true;
@@ -1206,6 +1584,7 @@
       }
     }
 
+    // ---- Helpers ----
     function roundToStep(value, step) {
       if (!step || step <= 0) return value;
       return Math.round(value / step) * step;
@@ -1233,88 +1612,341 @@
       return "Accessory";
     }
 
-    function getMainLiftForDay(state, dayIndex) {
-      const mapping = ["squat", "bench", "deadlift", "squat", "bench", "deadlift"];
-      return mapping[(dayIndex - 1) % mapping.length];
+    function liftAbbrev(key) {
+      if (key === "squat") return "SQ";
+      if (key === "bench") return "BP";
+      if (key === "deadlift") return "DL";
+      return "ACC";
     }
 
-    function buildSessionPlan(state, week, day) {
-      const profile = state.profile;
-      const pType = state.program?.periodization || "linear";
-      const mainKey = getMainLiftForDay(state, day);
-      const rounding = profile.rounding || 2.5;
+    function getPhaseForWeek(totalWeeks, week) {
+      if (totalWeeks <= 8) {
+        const cut1 = Math.ceil(totalWeeks * 0.4);
+        const cut2 = Math.ceil(totalWeeks * 0.75);
+        if (week <= cut1) return "volume";
+        if (week <= cut2) return "intensity";
+        if (week === totalWeeks) return "max";
+        return "peaking";
+      }
+      const cut1 = Math.ceil(totalWeeks * 0.45);
+      const cut2 = Math.ceil(totalWeeks * 0.8);
+      if (week <= cut1) return "volume";
+      if (week <= cut2) return "intensity";
+      if (week === totalWeeks) return "max";
+      return "peaking";
+    }
 
+    function getGoalBias(goalType, liftKey) {
+      const base = { volumeMul: 1, intensityShift: 0 };
+      if (goalType === "squatBias") {
+        if (liftKey === "squat") return { volumeMul: 1.25, intensityShift: 0.02 };
+        if (liftKey === "bench") return { volumeMul: 0.9, intensityShift: -0.01 };
+        if (liftKey === "deadlift") return { volumeMul: 0.9, intensityShift: 0 };
+      } else if (goalType === "benchBias") {
+        if (liftKey === "bench") return { volumeMul: 1.3, intensityShift: 0.02 };
+        if (liftKey === "squat") return { volumeMul: 0.95, intensityShift: 0 };
+        if (liftKey === "deadlift") return { volumeMul: 0.9, intensityShift: 0 };
+      } else if (goalType === "deadliftBias") {
+        if (liftKey === "deadlift") return { volumeMul: 1.2, intensityShift: 0.02 };
+        if (liftKey === "squat") return { volumeMul: 1.0, intensityShift: 0 };
+        if (liftKey === "bench") return { volumeMul: 0.9, intensityShift: -0.01 };
+      }
+      return base;
+    }
+
+    function baseTemplates(daysPerWeek) {
+      const t3 = [
+        ["squat", "bench"],
+        ["deadlift", "bench"],
+        ["squat", "bench", "deadlift"]
+      ];
+      const t4 = [
+        ["squat", "bench"],
+        ["deadlift", "bench"],
+        ["squat", "bench"],
+        ["deadlift", "squat"]
+      ];
+      const t5 = [
+        ["squat", "bench"],
+        ["deadlift", "bench"],
+        ["squat"],
+        ["bench"],
+        ["squat", "deadlift"]
+      ];
+      const t6 = [
+        ["squat", "bench"],
+        ["deadlift"],
+        ["bench", "squat"],
+        ["deadlift", "bench"],
+        ["squat"],
+        ["bench", "deadlift"]
+      ];
+      if (daysPerWeek <= 3) return t3;
+      if (daysPerWeek === 4) return t4;
+      if (daysPerWeek === 5) return t5;
+      return t6;
+    }
+
+    function computeDayLifts(goalType, daysPerWeek, dayIndex) {
+      const base = baseTemplates(daysPerWeek);
+      const template = base[(dayIndex - 1) % base.length];
+      const lifts = template.slice();
+
+      if (goalType === "squatBias" && !lifts.includes("squat") && dayIndex % 2 === 1) {
+        lifts.unshift("squat");
+      } else if (goalType === "benchBias" && !lifts.includes("bench") && dayIndex % 2 === 1) {
+        lifts.unshift("bench");
+      } else if (goalType === "deadliftBias" && !lifts.includes("deadlift") && dayIndex % 2 === 1) {
+        lifts.push("deadlift");
+      }
+
+      const seen = new Set();
+      return lifts.filter(l => {
+        if (seen.has(l)) return false;
+        seen.add(l);
+        return true;
+      });
+    }
+
+    function buildMainLiftExercise(liftKey, profile, week, totalWeeks, periodization, phase, tuning, isPrimary) {
+      const rounding = profile.rounding || 2.5;
+      const maxMap = {
+        squat: profile.squatMax || 0,
+        bench: profile.benchMax || 0,
+        deadlift: profile.deadliftMax || 0
+      };
+      const max = maxMap[liftKey] || 0;
+      const goalBias = getGoalBias(profile.goalType || "balanced", liftKey);
+      const volumeMultiplier = goalBias.volumeMul * (isPrimary ? 1 : 0.7);
+      const weekProgress = (week - 1) / Math.max(totalWeeks - 1, 1);
+
+      let base = 0.7;
+      if (phase === "volume") {
+        base = 0.66 + 0.06 * weekProgress;
+      } else if (phase === "intensity") {
+        base = 0.74 + 0.06 * weekProgress;
+      } else if (phase === "peaking") {
+        base = 0.8 + 0.04 * weekProgress;
+      } else if (phase === "max") {
+        base = 0.86;
+      }
+
+      if (periodization === "block") {
+        if (phase === "volume") base -= 0.03;
+        if (phase === "intensity" || phase === "peaking") base += 0.02;
+      } else if (periodization === "undulating") {
+        const wave = Math.sin(week * Math.PI / 2) * 0.04;
+        base += wave;
+      }
+
+      base += goalBias.intensityShift || 0;
+
+      const sets = [];
+      const maxSafe = max || 0;
+
+      if (phase === "volume") {
+        const warm1 = maxSafe * (base - 0.10);
+        const warm2 = maxSafe * (base - 0.05);
+        sets.push({ type: "ramp", reps: 6, weight: warm1 });
+        sets.push({ type: "ramp", reps: 5, weight: warm2 });
+
+        let workCount = Math.max(2, Math.round(3 * volumeMultiplier));
+        for (let i = 0; i < workCount; i++) {
+          sets.push({ type: "work", reps: 6, weight: maxSafe * base });
+        }
+
+        const backoffCount = isPrimary ? 2 : 1;
+        for (let i = 0; i < backoffCount; i++) {
+          sets.push({ type: "backoff", reps: 8, weight: maxSafe * (base - 0.06) });
+        }
+      } else if (phase === "intensity") {
+        const warm1 = maxSafe * (base - 0.12);
+        const warm2 = maxSafe * (base - 0.06);
+        sets.push({ type: "ramp", reps: 3, weight: warm1 });
+        sets.push({ type: "ramp", reps: 2, weight: warm2 });
+
+        const singlePercent = base + 0.06;
+        sets.push({ type: "single", reps: 1, weight: maxSafe * singlePercent, rpe: "7–8" });
+
+        let workCount = Math.max(2, Math.round(2 * volumeMultiplier));
+        for (let i = 0; i < workCount; i++) {
+          sets.push({ type: "work", reps: 3, weight: maxSafe * base, rpe: "7–8" });
+        }
+
+        const backoffCount = isPrimary ? 1 : 0;
+        for (let i = 0; i < backoffCount; i++) {
+          sets.push({ type: "backoff", reps: 4, weight: maxSafe * (base - 0.08) });
+        }
+      } else if (phase === "peaking") {
+        const warm1 = maxSafe * (base - 0.14);
+        sets.push({ type: "ramp", reps: 2, weight: warm1 });
+
+        const single1 = maxSafe * (base + 0.02);
+        const single2 = maxSafe * (base + 0.06);
+        sets.push({ type: "single", reps: 1, weight: single1, rpe: "7–8" });
+        sets.push({ type: "single", reps: 1, weight: single2, rpe: "8–9" });
+
+        if (isPrimary) {
+          sets.push({ type: "backoff", reps: 2, weight: maxSafe * (base - 0.06), rpe: "6–7" });
+        }
+      } else if (phase === "max") {
+        const s85 = maxSafe * 0.85;
+        const s92 = maxSafe * 0.92;
+        const s97 = maxSafe * 0.97;
+        sets.push({ type: "ramp", reps: 1, weight: s85, rpe: "7" });
+        sets.push({ type: "single", reps: 1, weight: s92, rpe: "8–9" });
+        sets.push({ type: "single", reps: 1, weight: s97, rpe: "9–10" });
+      }
+
+      const t = tuning || defaultLiftTuning();
+      if (t.repDelta) {
+        sets.forEach(s => {
+          if (s.type === "work" || s.type === "backoff") {
+            s.reps = Math.max(1, (s.reps || 1) + t.repDelta);
+          }
+        });
+      }
+      if (t.weightDeltaAbs) {
+        sets.forEach(s => {
+          if (s.weight) {
+            s.weight = Math.max(0, s.weight + t.weightDeltaAbs);
+          }
+        });
+      }
+      if (t.setDelta) {
+        let workIdx = sets.findIndex(s => s.type === "work");
+        if (workIdx === -1) workIdx = sets.findIndex(s => s.type === "backoff");
+        if (workIdx !== -1) {
+          if (t.setDelta > 0) {
+            const last = sets[sets.length - 1];
+            for (let i = 0; i < t.setDelta; i++) {
+              sets.push({ ...last });
+            }
+          } else {
+            for (let i = 0; i < Math.abs(t.setDelta); i++) {
+              if (sets.length > workIdx + 1) sets.pop();
+            }
+          }
+        }
+      }
+
+      sets.forEach(s => {
+        if (s.weight) {
+          s.weight = roundToStep(s.weight, rounding);
+        }
+      });
+
+      return {
+        liftKey,
+        exerciseName: mainLiftName(liftKey) + " (comp)",
+        type: "main",
+        phase,
+        sets
+      };
+    }
+
+    function buildAccessoriesForDay(dayLifts, profile, phase) {
+      const rounding = profile.rounding || 2.5;
       const maxes = {
         squat: profile.squatMax || 0,
         bench: profile.benchMax || 0,
         deadlift: profile.deadliftMax || 0
       };
-
-      const weekFactorBase = { linear: 0.68, undulating: 0.64, block: 0.62 }[pType] || 0.68;
-      let weekBump = 0.0;
-      if (pType === "linear") weekBump = (week - 1) * 0.02;
-      if (pType === "block") weekBump = (week - 1) * 0.025;
-      if (pType === "undulating") weekBump = (Math.sin((week - 1) * Math.PI / 4) * 0.02);
-
-      const mainPercent = Math.min(0.88, weekFactorBase + weekBump);
-      const mainMax = maxes[mainKey] || 0;
-
-      const mainWorkWeight = rounding ? roundToStep(mainMax * mainPercent, rounding) : mainMax * mainPercent;
-      const topSetPercent = mainPercent + 0.02;
-
-      const mainSets = [
-        { type: "ramp", reps: 5, weight: rounding ? roundToStep(mainMax * (mainPercent - 0.08), rounding) : mainMax * (mainPercent - 0.08) },
-        { type: "ramp", reps: 5, weight: rounding ? roundToStep(mainMax * (mainPercent - 0.04), rounding) : mainMax * (mainPercent - 0.04) },
-        { type: "top", reps: 3, weight: rounding ? roundToStep(mainMax * topSetPercent, rounding) : mainMax * topSetPercent },
-        { type: "backoff", reps: 5, weight: mainWorkWeight },
-        { type: "backoff", reps: 5, weight: mainWorkWeight }
-      ];
-
       const accessories = [];
+      const mainFocus = dayLifts[0] || "squat";
+      const env = profile.equipmentMode || "barbellDb";
 
-      if (mainKey === "squat") {
-        accessories.push(
-          { liftKey: "accessory", exerciseName: "Barbell RDL", sets: 3, reps: 8, weight: 0.55 * (maxes.deadlift || mainMax || 135) },
-          { liftKey: "accessory", exerciseName: "Pull-ups", sets: 3, reps: 6, weight: 0 }
-        );
-      } else if (mainKey === "bench") {
-        accessories.push(
-          { liftKey: "accessory", exerciseName: "Barbell Row", sets: 3, reps: 8, weight: 0.6 * (maxes.deadlift || maxes.squat || 185) },
-          { liftKey: "accessory", exerciseName: "DB Press (light)", sets: 3, reps: 12, weight: 0 }
-        );
-      } else if (mainKey === "deadlift") {
-        accessories.push(
-          { liftKey: "accessory", exerciseName: "Front Squat (light)", sets: 3, reps: 6, weight: 0.5 * (maxes.squat || mainMax || 185) },
-          { liftKey: "accessory", exerciseName: "Pull-ups", sets: 3, reps: 6, weight: 0 }
-        );
+      function addAcc(exerciseName, baseLiftKey, sets, reps, percent) {
+        const max = maxes[baseLiftKey] || 0;
+        const weight = percent ? roundToStep(max * percent, rounding) : 0;
+        accessories.push({
+          liftKey: "accessory",
+          exerciseName,
+          type: "accessory",
+          phase,
+          sets: Array.from({ length: sets }, () => ({
+            type: "straight",
+            reps,
+            weight
+          }))
+        });
       }
 
-      accessories.forEach(acc => {
-        if (acc.weight) {
-          acc.weight = rounding ? roundToStep(acc.weight, rounding) : acc.weight;
+      if (env === "barbellOnly") {
+        if (mainFocus === "squat") {
+          addAcc("Paused squat", "squat", 3, 4, phase === "volume" ? 0.7 : 0.75);
+          addAcc("Tempo squat (3–0–1)", "squat", 2, 5, 0.6);
+        } else if (mainFocus === "bench") {
+          addAcc("Close-grip bench", "bench", 3, 6, 0.7);
+          addAcc("Spoto press", "bench", 2, 4, 0.7);
+          addAcc("Barbell row", "deadlift", 3, 8, 0.6);
+        } else if (mainFocus === "deadlift") {
+          addAcc("Deficit deadlift", "deadlift", 2, 3, 0.75);
+          addAcc("Snatch-grip deadlift", "deadlift", 2, 5, 0.65);
+          addAcc("Front squat", "squat", 3, 5, 0.6);
         }
+      } else if (env === "barbellDb") {
+        if (mainFocus === "squat") {
+          addAcc("Barbell RDL", "deadlift", 3, 8, phase === "volume" ? 0.6 : 0.55);
+          addAcc("DB split squat", "squat", 3, 8, 0.5);
+          if (!dayLifts.includes("bench")) {
+            addAcc("DB bench (volume)", "bench", 3, 10, 0.5);
+          }
+        } else if (mainFocus === "bench") {
+          addAcc("Barbell row", "deadlift", 3, 8, 0.6);
+          addAcc("DB incline press", "bench", 3, 10, 0.55);
+          addAcc("DB fly or pushup", "bench", 3, 12, 0);
+        } else if (mainFocus === "deadlift") {
+          addAcc("Front squat (light)", "squat", 3, 6, 0.5);
+          addAcc("DB RDL", "deadlift", 3, 10, 0.5);
+          addAcc("Ab wheel / core", "deadlift", 3, 8, 0);
+        }
+      } else {
+        // gymFull
+        if (mainFocus === "squat") {
+          addAcc("Barbell RDL", "deadlift", 3, 8, phase === "volume" ? 0.6 : 0.55);
+          addAcc("Leg press", "squat", 3, 10, 0.65);
+          if (!dayLifts.includes("bench")) {
+            addAcc("DB bench (volume)", "bench", 3, 10, 0.5);
+          }
+        } else if (mainFocus === "bench") {
+          addAcc("Barbell row", "deadlift", 3, 8, 0.6);
+          addAcc("DB incline press", "bench", 3, 10, 0.55);
+          addAcc("Tricep pushdown", "bench", 3, 12, 0);
+        } else if (mainFocus === "deadlift") {
+          addAcc("Front squat (light)", "squat", 3, 6, 0.5);
+          addAcc("Hamstring curl", "deadlift", 3, 10, 0);
+          addAcc("Ab wheel", "deadlift", 3, 8, 0);
+        }
+      }
+
+      return dayLifts.length >= 3 ? accessories.slice(0, 2) : accessories;
+    }
+
+    function buildSessionPlan(state, week, day) {
+      const profile = state.profile;
+      const periodization = state.program?.periodization || "linear";
+      const totalWeeks = profile.blockWeeks || 12;
+      const phase = getPhaseForWeek(totalWeeks, week);
+      const dayLifts = computeDayLifts(profile.goalType || "balanced", profile.daysPerWeek || 4, day);
+
+      const plan = [];
+      dayLifts.forEach((liftKey, idx) => {
+        const tuning = state.program.tuning?.[liftKey] || defaultLiftTuning();
+        const ex = buildMainLiftExercise(liftKey, profile, week, totalWeeks, periodization, phase, tuning, idx === 0);
+        plan.push(ex);
       });
 
-      const sessionPlan = [
-        {
-          liftKey: mainKey,
-          exerciseName: mainLiftName(mainKey) + " (comp)",
-          type: "main",
-          sets: mainSets
-        },
-        ...accessories.map(acc => ({
-          liftKey: acc.liftKey,
-          exerciseName: acc.exerciseName,
-          type: "accessory",
-          sets: Array.from({ length: acc.sets }, () => ({
-            type: "straight",
-            reps: acc.reps,
-            weight: acc.weight || 0
-          }))
-        }))
-      ];
+      const accessories = buildAccessoriesForDay(dayLifts, profile, phase);
+      const rounding = profile.rounding || 2.5;
+      accessories.forEach(acc => {
+        acc.sets.forEach(s => {
+          if (s.weight) s.weight = roundToStep(s.weight, rounding);
+        });
+      });
+      plan.push(...accessories);
 
-      return sessionPlan;
+      return plan;
     }
 
     function startNewSession(state) {
@@ -1331,7 +1963,8 @@
         exerciseIndex: 0,
         setIndex: 0,
         plan: sessionPlan,
-        done: false
+        done: false,
+        totalRestSeconds: 0
       };
     }
 
@@ -1366,8 +1999,63 @@
       state.history.push(payload);
     }
 
-    // ---- Rendering ----
+    function computeSessionMetrics(state, sessionId) {
+      const sets = (state.history || []).filter(h => h.sessionId === sessionId);
+      if (!sets.length) return null;
 
+      const profile = state.profile || {};
+      const units = profile.units || "lb";
+      const bw = profile.bodyweight || 0;
+
+      let tonnage = 0;
+      let diffSum = 0;
+      let diffCount = 0;
+      let bestE1 = 0;
+      let totalWorkWeight = 0;
+      let totalReps = 0;
+      let restSeconds = 0;
+
+      sets.forEach(h => {
+        if (h.weight && h.reps) {
+          tonnage += h.weight * h.reps;
+          const e1 = estimateE1RM(h.weight, h.reps);
+          if (e1 && e1 > bestE1) bestE1 = e1;
+          totalWorkWeight += h.weight;
+          totalReps += h.reps;
+        }
+        if (h.difficulty) {
+          diffSum += h.difficulty;
+          diffCount += 1;
+        }
+        if (h.restSeconds) {
+          restSeconds += h.restSeconds;
+        }
+      });
+
+      const avgDiff = diffCount ? diffSum / diffCount : null;
+
+      const tonnageKg = units === "lb" ? tonnage * 0.453592 : tonnage;
+      const bodyFactor = bw
+        ? ((units === "lb" ? bw * 0.453592 : bw) / 80)
+        : 1;
+      let calories = tonnageKg * 0.006 * bodyFactor;
+      if (avgDiff) {
+        calories *= 0.9 + (6 - avgDiff) * 0.07;
+      }
+
+      const performance = tonnage * (avgDiff ? (6 - avgDiff) : 1);
+
+      return {
+        tonnage,
+        bestE1,
+        avgDiff,
+        performance,
+        calories,
+        restMinutes: restSeconds / 60
+      };
+    }
+
+    // ---- Rendering ----
     function renderAvatar() {
       const state = ensureState();
       const p = state.profile || {};
@@ -1384,6 +2072,12 @@
       }
     }
 
+    function getPrimaryLiftForNext(state) {
+      const next = state.nextSession || { week: 1, day: 1 };
+      const lifts = computeDayLifts(state.profile.goalType || "balanced", state.profile.daysPerWeek || 4, next.day);
+      return lifts[0] || "squat";
+    }
+
     function renderSummary() {
       const state = ensureState();
       const summaryMainLiftEl = document.getElementById("summaryMainLift");
@@ -1394,23 +2088,27 @@
       const readinessSubEl = document.getElementById("summaryReadinessSub");
 
       const next = state.nextSession || { week: 1, day: 1 };
-      const mainKey = getMainLiftForDay(state, next.day);
-      summaryMainLiftEl.textContent = mainLiftName(mainKey);
-      summaryMainSubEl.textContent = `Next up: Week ${next.week}, Day ${next.day} · ${mainLiftName(mainKey)} focus`;
+      const mainKey = getPrimaryLiftForNext(state);
+      const totalWeeks = state.profile.blockWeeks || 12;
+      const phase = getPhaseForWeek(totalWeeks, next.week);
 
+      summaryMainLiftEl.textContent = `${mainLiftName(mainKey)} · ${phase}`;
+      summaryMainSubEl.textContent = `Next: Week ${next.week}, Day ${next.day} · primary ${mainLiftName(mainKey)}`;
       weeksChip.textContent = `Block: ${state.profile.blockWeeks || "—"} weeks`;
       freqChip.textContent = `Freq: ${state.profile.daysPerWeek || "—"} days / wk`;
 
-      const last3 = state.history.slice(-20)
-        .filter(h => h.liftKey === mainKey)
-        .slice(-15);
-      if (!last3.length) {
+      const lastMain = state.history
+        .slice(-80)
+        .filter(h => h.liftKey === mainKey);
+
+      if (!lastMain.length) {
         readinessScoreEl.textContent = "—";
         readinessSubEl.textContent = "We’ll score readiness once you log a few sessions.";
         return;
       }
+
       const bySession = {};
-      last3.forEach(h => {
+      lastMain.forEach(h => {
         bySession[h.sessionId] = bySession[h.sessionId] || [];
         bySession[h.sessionId].push(h);
       });
@@ -1424,6 +2122,7 @@
       });
       if (!count) {
         readinessScoreEl.textContent = "—";
+        readinessSubEl.textContent = "Need a few difficulty ratings.";
         return;
       }
       avg = avg / count;
@@ -1445,15 +2144,142 @@
       document.getElementById("dlMax").value = profile.deadliftMax || "";
       document.getElementById("roundStep").value = profile.rounding || 2.5;
       document.getElementById("daysPerWeek").value = profile.daysPerWeek || 4;
-      document.getElementById("blockWeeks").value = profile.blockWeeks || 8;
+      document.getElementById("blockWeeks").value = profile.blockWeeks || 12;
       document.getElementById("periodizationType").value = state.program?.periodization || "linear";
       document.getElementById("goalType").value = profile.goalType || "balanced";
+
+      document.getElementById("age").value = profile.age || "";
+      document.getElementById("bodyweight").value = profile.bodyweight || "";
+      document.getElementById("heightIn").value = profile.heightIn || "";
+      document.getElementById("equipmentMode").value = profile.equipmentMode || "barbellDb";
 
       document.getElementById("themeSelect").value = profile.theme || "emerald";
       document.getElementById("layoutMode").value = profile.layoutMode || "mobile";
 
       applyTheme(profile.theme || "emerald");
       applyLayout(profile.layoutMode || "mobile");
+
+      renderProgramOverview();
+    }
+
+    function renderProgramOverview() {
+      const state = ensureState();
+      const wrapper = document.getElementById("programTableWrapper");
+      const labelEl = document.getElementById("programPhaseLabel");
+
+      if (!state.profile.blockWeeks || !state.profile.daysPerWeek) {
+        wrapper.innerHTML = `<div class="empty-state">Set days / week and block length, then generate a macrocycle.</div>`;
+        labelEl.textContent = "No macrocycle yet.";
+        return;
+      }
+
+      const totalWeeks = state.profile.blockWeeks;
+      const daysPerWeek = state.profile.daysPerWeek;
+      const units = state.profile.units || "lb";
+      let rowsHtml = "";
+
+      for (let w = 1; w <= totalWeeks; w++) {
+        const phase = getPhaseForWeek(totalWeeks, w);
+        rowsHtml += `<div style="margin-top:6px;font-size:11px;color:var(--muted);font-weight:600;">Week ${w} · ${phase}</div>`;
+        rowsHtml += `<table class="table" style="font-size:10px;margin-top:2px;">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Main lifts</th>
+              <th>Top work</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+        `;
+        for (let d = 1; d <= daysPerWeek; d++) {
+          const plan = buildSessionPlan(state, w, d);
+          const mains = plan.filter(p => p.type === "main");
+          const mainNames = mains.map(m => mainLiftName(m.liftKey)).join(" + ") || "—";
+
+          const topByLift = mains.map(m => {
+            const topSet = (m.sets || [])
+              .filter(s => s.weight)
+              .sort((a, b) => (b.weight || 0) - (a.weight || 0))[0];
+            if (!topSet || !topSet.weight) return `${liftAbbrev(m.liftKey)} —`;
+            return `${liftAbbrev(m.liftKey)} ${topSet.weight.toFixed(0)} ${units} × ${topSet.reps}`;
+          }).join(" / ");
+
+          const notes = phase === "volume"
+            ? "High volume, technique focus"
+            : phase === "intensity"
+              ? "Top single + heavy work sets"
+              : phase === "peaking"
+                ? "Singles + low backdown volume"
+                : "Max week: test singles";
+
+          rowsHtml += `
+            <tr class="program-day-row" data-week="${w}" data-day="${d}">
+              <td>${d}</td>
+              <td>${mainNames}</td>
+              <td>${topByLift || "—"}</td>
+              <td>${notes}</td>
+            </tr>
+          `;
+        }
+        rowsHtml += `</tbody></table>`;
+      }
+
+      wrapper.innerHTML = rowsHtml;
+      labelEl.textContent = `Macrocycle: ${totalWeeks} weeks · periodization: ${state.program.periodization}, goal: ${state.profile.goalType}.`;
+
+      // delegate click for day detail
+      wrapper.addEventListener("click", e => {
+        const row = e.target.closest(".program-day-row");
+        if (!row) return;
+        const w = parseInt(row.dataset.week, 10);
+        const d = parseInt(row.dataset.day, 10);
+        renderProgramDayDetail(w, d);
+      }, { once: true }); // attach once, inside re-render we reattach
+    }
+
+    function renderProgramDayDetail(week, day) {
+      const state = ensureState();
+      const detailEl = document.getElementById("programDetailPanel");
+      const plan = buildSessionPlan(state, week, day);
+      const totalWeeks = state.profile.blockWeeks || 12;
+      const phase = getPhaseForWeek(totalWeeks, week);
+      const units = state.profile.units || "lb";
+
+      let html = `
+        <div class="program-detail-title">Week ${week}, Day ${day}</div>
+        <div class="program-detail-sub">
+          ${phase === "volume" ? "Volume emphasis" : phase === "intensity" ? "Strength / intensity focus" : phase === "peaking" ? "Peaking work leading into max week" : "Max week — test singles."}
+        </div>
+      `;
+
+      plan.forEach(ex => {
+        const tagLabel = ex.type === "main"
+          ? "Main lift"
+          : "Accessory";
+        html += `
+          <div class="program-detail-ex">
+            <div class="program-detail-ex-header">
+              <div>${ex.exerciseName}</div>
+              <div class="program-detail-tag">${tagLabel}</div>
+            </div>
+        `;
+
+        const lines = ex.sets.map((s, idx) => {
+          const w = s.weight ? `${s.weight.toFixed(0)} ${units}` : "bodyweight / light";
+          const rpe = s.rpe ? ` · RPE ${s.rpe}` : "";
+          return `Set ${idx + 1}: ${w} × ${s.reps} reps${rpe}`;
+        }).join("<br>");
+
+        html += `
+            <div class="program-detail-sets">
+              ${lines}
+            </div>
+          </div>
+        `;
+      });
+
+      detailEl.innerHTML = html;
     }
 
     function renderTodayView() {
@@ -1467,9 +2293,12 @@
 
       if (!current || current.done) {
         const next = state.nextSession || { week: 1, day: 1 };
-        const mainKey = getMainLiftForDay(state, next.day);
+        const dayLifts = computeDayLifts(state.profile.goalType || "balanced", state.profile.daysPerWeek || 4, next.day);
+        const mainKey = dayLifts[0] || "squat";
+        const totalWeeks = state.profile.blockWeeks || 12;
+        const phase = getPhaseForWeek(totalWeeks, next.week);
         titleEl.textContent = "Start next session";
-        captionEl.textContent = `Week ${next.week}, Day ${next.day} · ${mainLiftName(mainKey)} focus.`;
+        captionEl.textContent = `Week ${next.week}, Day ${next.day} · ${dayLifts.map(mainLiftName).join(" + ")} · ${phase}.`;
         badgeTextEl.textContent = "Idle";
 
         contentEl.innerHTML = `
@@ -1496,25 +2325,36 @@
       const set = ex.sets[current.setIndex];
       const totalSets = ex.sets.length;
       const setNumber = current.setIndex + 1;
-
       const labelLift = ex.type === "main"
         ? `${mainLiftName(ex.liftKey)} (competition)`
         : ex.exerciseName;
-
       captionEl.textContent = labelLift;
 
-      const weightDisplay = set.weight ? `${set.weight.toFixed(0)} ${state.profile.units || "lb"}` : "bodyweight / light";
+      const weightDisplay = set.weight
+        ? `${set.weight.toFixed(0)} ${state.profile.units || "lb"}`
+        : "bodyweight / light";
+
+      const rpeText = set.rpe ? ` · target RPE ${set.rpe}` : "";
+
+      const recommendedRestSec = (() => {
+        if (set.type === "single") return 240;
+        if (set.type === "work") return 210;
+        if (set.type === "backoff") return 180;
+        if (ex.type === "accessory") return 120;
+        return 150;
+      })();
 
       contentEl.innerHTML = `
         <div class="today-main-line">
           Set ${setNumber} of ${totalSets}
         </div>
         <div class="today-sub-line">
-          ${weightDisplay} × ${set.reps} reps
+          ${weightDisplay} × ${set.reps} reps${rpeText}
         </div>
         <div class="today-ex-meta">
           <div class="meta-pill">Exercise ${current.exerciseIndex + 1} of ${current.plan.length}</div>
           <div class="meta-pill">${ex.type === "main" ? "Main lift" : "Accessory"}</div>
+          <div class="meta-pill">${ex.phase === "volume" ? "Volume" : ex.phase === "intensity" ? "Intensity" : ex.phase === "peaking" ? "Peaking" : "Max week"}</div>
         </div>
         <div class="section-title-row">
           <div class="section-title">How did that set feel?</div>
@@ -1537,6 +2377,18 @@
         <div class="difficulty-help">
           We’ll use your rating to bump the next set’s weight up or down. Accessories can be treated more loosely than main SBD work.
         </div>
+        <div class="rest-timer-row" data-base-rest="${recommendedRestSec}">
+          <div class="rest-timer-meta">
+            <div class="rest-timer-label">
+              Suggested rest: ${Math.round(recommendedRestSec / 60)} min (heavier sets = longer rest).
+            </div>
+            <div class="rest-timer-count" id="restTimerCount">Ready</div>
+          </div>
+          <div class="rest-timer-actions">
+            <button class="rest-btn primary" id="startRestBtn">Start rest</button>
+            <button class="rest-btn" id="endRestBtn" disabled>Done resting</button>
+          </div>
+        </div>
       `;
 
       contentEl.querySelectorAll(".difficulty-btn").forEach(btn => {
@@ -1544,6 +2396,61 @@
           const level = parseInt(btn.dataset.level, 10);
           handleSetRating(level);
         });
+      });
+
+      setupRestTimer(recommendedRestSec);
+    }
+
+    function setupRestTimer(baseSeconds) {
+      const state = ensureState();
+      const current = state.currentSession;
+      if (!current) return;
+
+      const timerLabel = document.getElementById("restTimerCount");
+      const startBtn = document.getElementById("startRestBtn");
+      const endBtn = document.getElementById("endRestBtn");
+
+      if (!timerLabel || !startBtn || !endBtn) return;
+
+      let remaining = baseSeconds;
+      let intervalId = null;
+
+      function updateLabel() {
+        const m = Math.floor(remaining / 60);
+        const s = remaining % 60;
+        timerLabel.textContent = `${m}:${s.toString().padStart(2, "0")} remaining`;
+      }
+
+      startBtn.addEventListener("click", () => {
+        if (intervalId) return;
+        remaining = baseSeconds;
+        updateLabel();
+        startBtn.disabled = true;
+        endBtn.disabled = false;
+        const startTs = Date.now();
+        intervalId = setInterval(() => {
+          remaining -= 1;
+          if (remaining <= 0) {
+            remaining = 0;
+            clearInterval(intervalId);
+            intervalId = null;
+            timerLabel.textContent = "Rest complete";
+          } else {
+            updateLabel();
+          }
+        }, 1000);
+
+        endBtn.onclick = () => {
+          if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+          }
+          const elapsed = Math.round((Date.now() - startTs) / 1000);
+          current.totalRestSeconds = (current.totalRestSeconds || 0) + elapsed;
+          timerLabel.textContent = `Rested ${Math.round(elapsed / 60)} min`;
+          startBtn.disabled = false;
+          endBtn.disabled = true;
+        };
       });
     }
 
@@ -1554,7 +2461,6 @@
 
       const ex = current.plan[current.exerciseIndex];
       const set = ex.sets[current.setIndex];
-
       const units = state.profile.units || "lb";
 
       recordSet(state, {
@@ -1562,17 +2468,22 @@
         timestamp: new Date().toISOString(),
         week: current.week,
         day: current.day,
-        liftKey: ex.liftKey === "accessory" ? (ex.exerciseName.toLowerCase().includes("squat") ? "squat" :
-          ex.exerciseName.toLowerCase().includes("bench") ? "bench" :
-            ex.exerciseName.toLowerCase().includes("dead") ? "deadlift" :
-              "accessory") : ex.liftKey,
+        liftKey: ex.liftKey === "accessory"
+          ? (ex.exerciseName.toLowerCase().includes("squat") ? "squat" :
+            ex.exerciseName.toLowerCase().includes("bench") ? "bench" :
+              ex.exerciseName.toLowerCase().includes("dead") ? "deadlift" :
+                "accessory")
+          : ex.liftKey,
         exerciseName: ex.exerciseName,
         setIndex: current.setIndex + 1,
         reps: set.reps,
         weight: set.weight || 0,
         difficulty: level,
-        units: units
+        units: units,
+        restSeconds: current.totalRestSeconds || 0
       });
+
+      current.totalRestSeconds = 0;
 
       if (current.setIndex < ex.sets.length - 1) {
         const nextSet = ex.sets[current.setIndex + 1];
@@ -1658,12 +2569,7 @@
       const all = state.history || [];
       if (!all.length) return null;
 
-      let filtered = all;
-      if (liftKey !== "all") {
-        filtered = filtered.filter(h => h.liftKey === liftKey);
-      } else {
-        filtered = filtered.filter(h => h.liftKey === "squat" || h.liftKey === "bench" || h.liftKey === "deadlift");
-      }
+      const filtered = all.filter(h => h.liftKey === liftKey);
       if (!filtered.length) return null;
 
       const bySession = {};
@@ -1673,27 +2579,13 @@
         if (h.timestamp < bySession[h.sessionId].date) bySession[h.sessionId].date = h.timestamp;
       });
 
-      const sessions = Object.values(bySession).map(s => {
-        let tonnage = 0;
-        let diffSum = 0, diffCount = 0;
-        let bestE1 = 0;
-        s.sets.forEach(h => {
-          if (h.weight && h.reps) {
-            tonnage += h.weight * h.reps;
-            const e1 = estimateE1RM(h.weight, h.reps);
-            if (e1 && e1 > bestE1) bestE1 = e1;
-          }
-          if (h.difficulty) {
-            diffSum += h.difficulty;
-            diffCount += 1;
-          }
-        });
-        const avgDiff = diffCount ? diffSum / diffCount : null;
+      const sessions = Object.entries(bySession).map(([sessionId, s]) => {
+        const metrics = computeSessionMetrics(state, sessionId) || {};
         return {
+          sessionId,
           date: s.date,
-          tonnage,
-          bestE1,
-          avgDiff
+          sets: s.sets,
+          ...metrics
         };
       }).sort((a, b) => new Date(a.date) - new Date(b.date));
 
@@ -1733,6 +2625,9 @@
 
     function renderDashboardView() {
       const liftKey = document.getElementById("dashLiftFilter").value;
+      const metric = document.getElementById("chartMetricSelect").value;
+      const range = document.getElementById("chartRangeSelect").value;
+
       const data = computeDashboardData(liftKey);
       const tagEl = document.getElementById("dashSummaryTag");
       const bestE1El = document.getElementById("dashBestE1RM");
@@ -1743,15 +2638,23 @@
       const trendSubEl = document.getElementById("dashTrendSub");
       const setCountEl = document.getElementById("dashSetCount");
       const setSubEl = document.getElementById("dashSetSub");
-      const chartRangeEl = document.getElementById("dashChartRange");
-      const chartEl = document.getElementById("dashBarChart");
-      const chartMetaRight = document.getElementById("dashBarMetaRight");
-      const prRowsEl = document.getElementById("dashPRRows");
+      const chartMetaLeft = document.getElementById("chartMetaLeft");
+      const chartMetaRight = document.getElementById("chartMetaRight");
+      const units = ensureState().profile.units || "lb";
 
-      const label = liftKey === "all" ? "All SBD sets" : `${mainLiftName(liftKey)} only`;
+      const chartSubtitle = document.getElementById("chartSubtitle");
+      if (metric === "performance") {
+        chartSubtitle.textContent = "Weighted by load, reps, and how it felt, higher is better.";
+      } else if (metric === "calories") {
+        chartSubtitle.textContent = "Estimated calories burned per session.";
+      } else if (metric === "sessionTime") {
+        chartSubtitle.textContent = "Session time is rough based on logged sets and rest.";
+      } else {
+        chartSubtitle.textContent = "Total rest time spent between sets.";
+      }
 
       if (!data) {
-        tagEl.textContent = `${label} · no data`;
+        tagEl.textContent = `${mainLiftName(liftKey)} · no data`;
         bestE1El.textContent = "—";
         bestE1SubEl.textContent = "Log a few sets and we’ll estimate your 1RM.";
         lastTonEl.textContent = "—";
@@ -1760,17 +2663,18 @@
         trendSubEl.textContent = "Trend will show once we have more history.";
         setCountEl.textContent = "0";
         setSubEl.textContent = "Working sets logged.";
-        chartRangeEl.textContent = "No sessions";
-        chartEl.innerHTML = "";
+        renderChart([], metric);
+        chartMetaLeft.textContent = "Each bar = one session.";
         chartMetaRight.textContent = "";
-        prRowsEl.innerHTML = `<div class="empty-state">No data yet. Rate sets in the Today tab.</div>`;
+        document.getElementById("dashPRRows").innerHTML =
+          `<div class="empty-state">No data yet. Rate sets in the Today tab.</div>`;
         return;
       }
 
-      tagEl.textContent = `${label} · ${(data.sessions.length)} sessions`;
+      tagEl.textContent = `${mainLiftName(liftKey)} · ${data.sessions.length} sessions`;
 
       if (data.globalBest) {
-        bestE1El.textContent = `${data.globalBest.toFixed(0)} ${ensureState().profile.units || "lb"}`;
+        bestE1El.textContent = `${data.globalBest.toFixed(0)} ${units}`;
         const d = new Date(data.sessions.find(s => s.bestE1 === data.globalBest).date);
         bestE1SubEl.textContent = `Best estimated 1RM from training · ${d.toLocaleDateString()}`;
       } else {
@@ -1779,7 +2683,8 @@
       }
 
       if (data.lastSession) {
-        lastTonEl.textContent = data.lastSession.tonnage ? `${(data.lastSession.tonnage).toFixed(0)} ${ensureState().profile.units || "lb"}` : "—";
+        const t = data.lastSession.tonnage || 0;
+        lastTonEl.textContent = t ? `${t.toFixed(0)} ${units}` : "—";
         lastTonSubEl.textContent =
           `Avg difficulty ${data.lastSession.avgDiff ? data.lastSession.avgDiff.toFixed(1) : "—"}/5 · ${new Date(data.lastSession.date).toLocaleDateString()}`;
       } else {
@@ -1791,37 +2696,40 @@
         const delta = data.globalBest - data.prevBest;
         const pct = (delta / data.prevBest) * 100;
         const sign = delta >= 0 ? "+" : "";
-        trendValEl.textContent = `${sign}${delta.toFixed(0)} ${ensureState().profile.units || "lb"}`;
+        trendValEl.textContent = `${sign}${delta.toFixed(0)} ${units}`;
         trendSubEl.textContent = `${sign}${pct.toFixed(1)}% vs previous best 1RM`;
         trendValEl.classList.toggle("tag-green", delta >= 0);
         trendValEl.classList.toggle("tag-red", delta < 0);
       } else {
         trendValEl.textContent = "—";
         trendSubEl.textContent = "Need at least two strong sessions for a trend.";
+        trendValEl.classList.remove("tag-green", "tag-red");
       }
 
       setCountEl.textContent = data.setCount.toString();
       setSubEl.textContent = "Working sets logged.";
 
-      const sessions = data.sessions.slice(-8);
-      chartRangeEl.textContent = `${sessions.length} recent sessions`;
+      let sessions = data.sessions;
+      if (range !== "all") {
+        const n = parseInt(range, 10);
+        sessions = sessions.slice(-n);
+      }
 
-      const maxTon = Math.max(...sessions.map(s => s.tonnage || 0)) || 1;
-      chartEl.innerHTML = sessions.map(s => {
-        const hPct = Math.max(8, Math.round((s.tonnage || 0) / maxTon * 100));
-        const d = new Date(s.date);
-        const labelStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-        return `
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;">
-            <div class="bar" style="height:${hPct}%;">
-              <div class="bar-inner"></div>
-            </div>
-            <div class="bar-label">${labelStr}</div>
-          </div>
-        `;
-      }).join("");
+      renderChart(sessions, metric);
 
-      chartMetaRight.textContent = `Peak tonnage ${(maxTon).toFixed(0)} ${ensureState().profile.units || "lb"}`;
+      chartMetaLeft.textContent = "Each bar = one session for this lift.";
+      if (metric === "performance") {
+        const peak = sessions.reduce((a, s) => Math.max(a, s.performance || 0), 0);
+        chartMetaRight.textContent = peak ? `Peak score ${peak.toFixed(0)}` : "";
+      } else if (metric === "calories") {
+        const peak = sessions.reduce((a, s) => Math.max(a, s.calories || 0), 0);
+        chartMetaRight.textContent = peak ? `Peak ${peak.toFixed(0)} kcal` : "";
+      } else if (metric === "sessionTime") {
+        chartMetaRight.textContent = "";
+      } else {
+        const peak = sessions.reduce((a, s) => Math.max(a, s.restMinutes || 0), 0);
+        chartMetaRight.textContent = peak ? `Max rest ~${peak.toFixed(1)} min` : "";
+      }
 
       const prs = data.prByReps;
       const repTargets = [1, 3, 5];
@@ -1839,12 +2747,131 @@
         return `
           <div class="pr-row">
             <div class="pr-label">${r} rep best</div>
-            <div class="pr-value">${pr.weight.toFixed(0)} ${ensureState().profile.units || "lb"} · ${d.toLocaleDateString()}</div>
+            <div class="pr-value">${pr.weight.toFixed(0)} ${units} · ${d.toLocaleDateString()}</div>
           </div>
         `;
       }).join("");
 
-      prRowsEl.innerHTML = prRows;
+      document.getElementById("dashPRRows").innerHTML = prRows;
+    }
+
+    function renderChart(sessions, metric) {
+      const chartEl = document.getElementById("dashChart");
+      if (!chartEl) return;
+
+      if (!sessions.length) {
+        chartEl.innerHTML = `
+          <div class="chart-y-axis">
+            <div class="chart-y-tick">0</div>
+          </div>
+          <div class="chart-inner"></div>
+        `;
+        return;
+      }
+
+      const values = sessions.map(s => {
+        if (metric === "performance") return s.performance || 0;
+        if (metric === "calories") return s.calories || 0;
+        if (metric === "sessionTime") {
+          const setsCount = s.sets ? s.sets.length : 0;
+          return (setsCount * 2.5) + (s.restMinutes || 0);
+        }
+        return s.restMinutes || 0;
+      });
+
+      const minVal = 0;
+      const maxVal = Math.max(...values, 1);
+      const tickCount = 4;
+      const ticks = [];
+      for (let i = 0; i <= tickCount; i++) {
+        const v = minVal + (maxVal - minVal) * (tickCount - i) / tickCount;
+        ticks.push(v);
+      }
+
+      const axisHtml = ticks.map(v => `
+        <div class="chart-y-tick">${v >= 1000 ? (v / 1000).toFixed(1) + "k" : v.toFixed(0)}</div>
+      `).join("");
+
+      const barsHtml = sessions.map((s, idx) => {
+        const v = values[idx];
+        const hPct = Math.max(6, Math.round((v - minVal) / (maxVal - minVal || 1) * 100));
+        const d = new Date(s.date);
+        const labelStr = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+        return `
+          <div class="chart-bar-col" data-index="${idx}" data-value="${v}" data-date="${labelStr}">
+            <div class="chart-bar" style="height:${hPct}%;"></div>
+            <div class="bar-label">${labelStr}</div>
+          </div>
+        `;
+      }).join("");
+
+      chartEl.innerHTML = `
+        <div class="chart-y-axis">
+          ${axisHtml}
+        </div>
+        <div class="chart-inner">
+          ${barsHtml}
+          <div class="chart-tooltip" id="chartTooltip"></div>
+        </div>
+      `;
+
+      const tooltip = document.getElementById("chartTooltip");
+      const inner = chartEl.querySelector(".chart-inner");
+      if (!tooltip || !inner) return;
+
+      inner.querySelectorAll(".chart-bar-col").forEach(col => {
+        col.addEventListener("mouseenter", e => {
+          const rect = inner.getBoundingClientRect();
+          const colRect = col.getBoundingClientRect();
+          const v = parseFloat(col.dataset.value || "0");
+          const date = col.dataset.date;
+          let labelMetric = "";
+          if (metric === "performance") labelMetric = v.toFixed(0) + " score";
+          else if (metric === "calories") labelMetric = v.toFixed(0) + " kcal";
+          else labelMetric = v.toFixed(1) + " min";
+
+          tooltip.style.display = "block";
+          tooltip.style.left = ((colRect.left + colRect.right) / 2 - rect.left) + "px";
+          tooltip.style.top = (colRect.top - rect.top - 6) + "px";
+          tooltip.innerHTML = `${date}<br>${labelMetric}`;
+        });
+        col.addEventListener("mouseleave", () => {
+          tooltip.style.display = "none";
+        });
+      });
+    }
+
+    function buildTSV() {
+      const state = ensureState();
+      const rows = [["timestamp", "week", "day", "lift", "exercise", "weight", "reps", "difficulty", "units", "rest_seconds"]];
+      (state.history || []).forEach(h => {
+        rows.push([
+          h.timestamp,
+          h.week,
+          h.day,
+          h.liftKey,
+          h.exerciseName,
+          h.weight,
+          h.reps,
+          h.difficulty,
+          h.units,
+          h.restSeconds || 0
+        ]);
+      });
+      return rows.map(r => r.join("\t")).join("\n");
+    }
+
+    function downloadTSV() {
+      const tsv = buildTSV();
+      const blob = new Blob([tsv], { type: "text/tab-separated-values" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "pl-coach-log.tsv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     function renderAll() {
@@ -1870,8 +2897,57 @@
       }
     }
 
-    // ---- Events ----
+    function applyProgramAdjustment() {
+      const state = ensureState();
+      const week = parseInt(document.getElementById("progAdjustWeek").value || "0", 10);
+      const day = parseInt(document.getElementById("progAdjustDay").value || "0", 10);
+      const setIndex = parseInt(document.getElementById("progAdjustSetIndex").value || "0", 10);
+      const action = document.getElementById("progAdjustAction").value;
+      const amount = parseFloat(document.getElementById("progAdjustAmount").value || "0");
 
+      if (!week || !day || !setIndex || !amount) {
+        alert("Fill in week, day, set, and amount.");
+        return;
+      }
+
+      const plan = buildSessionPlan(state, week, day);
+      if (!plan || !plan.length) {
+        alert("Could not build session for that day.");
+        return;
+      }
+
+      const main = plan.find(p => p.type === "main") || plan[0];
+      const mainKey = main.liftKey;
+      const targetSet = main.sets[setIndex - 1];
+      if (!targetSet) {
+        alert("Set number is out of range for that day.");
+        return;
+      }
+
+      const tuning = state.program.tuning[mainKey] || defaultLiftTuning();
+      if (action === "incWeight" || action === "decWeight") {
+        if (!targetSet.weight) {
+          alert("Selected set has no bar weight to adjust.");
+          return;
+        }
+        const sign = action === "incWeight" ? 1 : -1;
+        tuning.weightDeltaAbs = (tuning.weightDeltaAbs || 0) + sign * amount;
+      } else if (action === "incReps" || action === "decReps") {
+        const sign = action === "incReps" ? 1 : -1;
+        tuning.repDelta = (tuning.repDelta || 0) + sign * amount;
+      } else if (action === "incSets" || action === "decSets") {
+        const sign = action === "incSets" ? 1 : -1;
+        tuning.setDelta = (tuning.setDelta || 0) + sign * amount;
+      }
+
+      state.program.tuning[mainKey] = tuning;
+      state.program.createdAt = new Date().toISOString();
+      saveStateToServer();
+      renderAll();
+      alert(`Updated ${mainLiftName(mainKey)} across the remaining macrocycle.`);
+    }
+
+    // ---- Events ----
     document.getElementById("syncBtn").addEventListener("click", () => {
       const input = document.getElementById("syncIdInput");
       const val = input.value.trim();
@@ -1905,8 +2981,13 @@
       p.deadliftMax = parseFloat(document.getElementById("dlMax").value) || null;
       p.rounding = parseFloat(document.getElementById("roundStep").value) || 2.5;
       p.daysPerWeek = parseInt(document.getElementById("daysPerWeek").value || "4", 10);
-      p.blockWeeks = parseInt(document.getElementById("blockWeeks").value || "8", 10);
+      p.blockWeeks = parseInt(document.getElementById("blockWeeks").value || "12", 10);
       p.goalType = document.getElementById("goalType").value;
+      p.age = parseInt(document.getElementById("age").value || "0", 10) || null;
+      p.bodyweight = parseFloat(document.getElementById("bodyweight").value) || null;
+      p.heightIn = parseFloat(document.getElementById("heightIn").value) || null;
+      p.equipmentMode = document.getElementById("equipmentMode").value;
+
       state.program = state.program || {};
       state.program.periodization = document.getElementById("periodizationType").value;
       saveStateToServer();
@@ -1920,9 +3001,14 @@
       state.program = state.program || {};
       state.program.periodization = document.getElementById("periodizationType").value;
       state.program.createdAt = new Date().toISOString();
+      state.program.tuning = {
+        squat: defaultLiftTuning(),
+        bench: defaultLiftTuning(),
+        deadlift: defaultLiftTuning()
+      };
       saveStateToServer();
       renderAll();
-      alert("Program regenerated from your profile. You can start at the Today tab.");
+      alert("Macrocycle regenerated from your profile. You can start at the Today tab.");
     });
 
     document.querySelectorAll(".nav-item").forEach(item => {
@@ -1938,6 +3024,18 @@
 
     document.getElementById("dashLiftFilter").addEventListener("change", () => {
       renderDashboardView();
+    });
+
+    document.getElementById("chartMetricSelect").addEventListener("change", () => {
+      renderDashboardView();
+    });
+
+    document.getElementById("chartRangeSelect").addEventListener("change", () => {
+      renderDashboardView();
+    });
+
+    document.getElementById("exportTsvBtn").addEventListener("click", () => {
+      downloadTSV();
     });
 
     document.getElementById("themeSelect").addEventListener("change", e => {
@@ -1972,6 +3070,10 @@
         renderAvatar();
       };
       reader.readAsDataURL(file);
+    });
+
+    document.getElementById("applyProgramAdjustBtn").addEventListener("click", () => {
+      applyProgramAdjustment();
     });
 
     renderAll();
